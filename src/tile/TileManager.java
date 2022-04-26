@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.color.ColorSpace;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -11,8 +12,8 @@ import game.GamePanel;
 
 public class TileManager {
 	GamePanel gp;
-	Tile[] tile;
-	int mapTileNum[][];
+	public Tile[] tile;
+	public int mapTileNum[][];
 	
 	static Color darkerGray1 = new Color(110, 110, 110);
 	static Color darkerGray2 = new Color(120, 120, 120);
@@ -98,7 +99,7 @@ public class TileManager {
 					createNetherrackBlock(g2, x, y, gp);
 				}
 				else if (tileNum == 2) {
-					createNetherrackBlock(g2, x, y, gp);
+					createDarkPrismarineBlock(g2, x, y, gp);
 				}
 				else if (tileNum == 3) {
 					createNetherBrick(g2, x, y, gp);
@@ -113,7 +114,10 @@ public class TileManager {
 		}
 	}
 	
-	public static void createLavaBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+	public void createLavaBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+		
+		tile[0] = new Tile();
+		tile[0].collision = true;
 
 		// Main Lava Block
 		graphics.setColor(lavaBlock);
@@ -153,93 +157,12 @@ public class TileManager {
 		graphics.fillRect(x + 18, y + 12, 2, 2);
 		
 	}
+		
 	
-	public static void createMagmaBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
-		// Main Magma Block
-		graphics.setColor(magmaBlock);
-		graphics.fillRect(x, y, gp.tileSize, gp.tileSize);
+	public void createNetherrackBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
 		
-		// Smaller pixels inside of Magma Block
-		graphics.setColor(darkerBrown1);
-		graphics.fillRect(x + 9, y + 9, 2, 2);
-		graphics.fillRect(x + 15, y + 15, 2, 2);
-		graphics.fillRect(x, y + 15, 2, 2);
-				   
-		graphics.setColor(orange);
-		graphics.fillRect(x + 11, y + 9, 2, 2);
-		graphics.fillRect(x + 8, y + 8, 2, 2);
-		graphics.fillRect(x + 8, y + 11, 2, 2);
-		graphics.fillRect(x + 18, y + 9, 2, 2);
-		graphics.fillRect(x + 9, y + 4, 2, 2);
-		graphics.fillRect(x + 5, y + 5, 2, 2);
-		graphics.fillRect(x + 6, y + 17, 2, 2);
-		graphics.fillRect(x + 17, y + 10, 1, 2);
-		graphics.fillRect(x + 15, y + 17, 2, 2);
-				   
-		graphics.setColor(darkOrange);
-		graphics.fillRect(x + 18, y + 6, 2, 3);
-		graphics.fillRect(x + 17, y + 6, 2, 2);
-		graphics.fillRect(x + 2, y + 6, 2, 4);
-		graphics.fillRect(x + 5, y + 3, 2, 2);
-		graphics.fillRect(x + 3, y + 4, 2, 3);
-		graphics.fillRect(x + 4, y + 7, 4, 2);
-		graphics.fillRect(x + 8, y + 6, 4, 2);
-		graphics.fillRect(x + 13, y + 15, 2, 3);
-		graphics.fillRect(x, y + 13, 3, 2);
-		graphics.fillRect(x + 14,  y, 4, 2);
-		graphics.fillRect(x + 8, y + 13, 4, 2);
-		graphics.fillRect(x + 7, y + 9, 1, 4);
-		graphics.fillRect(x + 5, y + 15, 4, 2);
-		graphics.fillRect(x + 18, y + 12, 2, 2);
-		
-	}
-	
-	public static void createNetherBrick(Graphics2D graphics, int x, int y, GamePanel gp) {
-		
-		// Main Nether Brick Block
-		graphics.setColor(netherBrick);
-		graphics.fillRect(x, y, gp.tileSize, gp.tileSize);
-		
-		// Smaller pixels inside of Nether Brick
-		graphics.setColor(netherDarkerBrown);
-		graphics.fillRect(x, y, gp.tileSize, 2);
-		graphics.fillRect(x, y + 6, gp.tileSize, 2);
-		graphics.fillRect(x, y + 12, gp.tileSize, 2);
-		graphics.fillRect(x, y + 18, gp.tileSize, 2);
-		
-		graphics.fillRect(x + 8, y + 1, 2, 5);
-		graphics.fillRect(x + 16, y + 1, 2, 5);
-		
-		graphics.fillRect(x + 6, y + 7, 2, 5);
-		graphics.fillRect(x + 14, y + 7, 2, 5);
-		
-		graphics.fillRect(x + 4, y + 13, 2, 5);
-		graphics.fillRect(x + 12, y + 13, 2, 5);
-		
-		graphics.setColor(netherLigherBrown);
-		graphics.fillRect(x, y + 2, 2, 2);
-		graphics.fillRect(x + 4, y + 2, 2, 2);
-		graphics.fillRect(x + 14, y + 2, 2, 2);
-		graphics.fillRect(x + 2, y + 4, 2, 2);
-		graphics.fillRect(x + 18, y + 4, 2, 2);
-		graphics.fillRect(x + 6, y + 4, 2, 2);
-		
-		graphics.fillRect(x + 12, y + 8, 2, 2);
-		graphics.fillRect(x + 2, y + 8, 2, 2);
-		graphics.fillRect(x + 16, y + 10, 2, 2);
-		graphics.fillRect(x + 8, y + 10, 2, 2);
-		graphics.fillRect(x + 10, y + 10, 2, 2);
-		
-		graphics.fillRect(x + 2, y + 14, 2, 2);
-		graphics.fillRect(x + 14, y + 14, 2, 2);
-		graphics.fillRect(x + 18, y + 14, 2, 2);
-		graphics.fillRect(x, y + 16, 2, 2);
-		graphics.fillRect(x + 6, y + 16, 2, 2);
-		graphics.fillRect(x + 10, y + 16, 2, 2);
-
-	}
-	
-	public static void createNetherrackBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+		tile[1] = new Tile();
+		tile[1].collision = false;
 		
 		// Main Netherrack Block
 		graphics.setColor(netherrackBlock);
@@ -296,8 +219,56 @@ public class TileManager {
 		graphics.fillRect(x + 16, y + 14, 2, 2);
 		
 	}
-	   
-	public static void createBedrock(Graphics2D graphics, int x, int y, GamePanel gp) {
+	
+
+	
+	public void createDarkPrismarineBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+		
+		tile[2] = new Tile();
+		tile[2].collision = false;
+		
+		// Main Dark Prismarine Block
+		graphics.setColor(darkPrismarineBlock);
+		graphics.fillRect(x, y, gp.tileSize, gp.tileSize);
+
+		
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				// Smaller pixels inside of Diamond Block
+				graphics.setColor(lighterGreen1);
+				graphics.fillRect(x + 2 + (i * 6), y + (j * 6), 2, 2);
+				graphics.fillRect(x + (i * 6), y + 2 + (j * 6), 2, 2);
+
+				graphics.setColor(ligherGreen2);
+				graphics.fillRect(x + 4 + (i * 6), y + (j * 6), 2, 2);
+				graphics.fillRect(x + 2 + (i * 6), y + 2 + (j * 6), 2, 2);
+				graphics.fillRect(x + (i * 6), y + 4 + (j * 6), 2, 2);
+				
+				graphics.setColor(darkerGreen2);
+				graphics.fillRect(x + 6 + (i * 6), y + 2 + (j * 6), 2, 2);
+				graphics.fillRect(x + 6 + (i * 6), y + 4 + (j * 6), 2, 2);
+				graphics.fillRect(x + 2 + (i * 6), y + 6 + (j * 6), 2, 2);
+				graphics.fillRect(x + 4 + (i * 6), y + 6 + (j * 6), 2, 2);
+				
+				graphics.setColor(darkerGreen1);
+				graphics.fillRect(x + (i * 6), y + 6 + (j * 6), 2, 2);
+				graphics.fillRect(x + 6 + (i * 6), y + (j * 6), 2, 2);
+				graphics.fillRect(x + 6 + (i * 6), y + 6 + (j * 6), 2, 2);
+				
+				graphics.setColor(fungusGreen);
+				graphics.fillRect(x + 4 + (i * 6), y + 2 + (j * 6), 2, 2);
+				graphics.fillRect(x + 4 + (i * 6), y + 4 + (j * 6), 2, 2);
+				graphics.fillRect(x + 2 + (i * 6), y + 6 + (j * 6), 2, 2);
+			}
+		}
+	}
+	
+
+	
+	public void createBedrock(Graphics2D graphics, int x, int y, GamePanel gp) {
+		
+		tile[3] = new Tile();
+		tile[3].collision = false;
 		
 		// Main Bedrock Block
 		graphics.setColor(bedrockBlock);
@@ -338,7 +309,102 @@ public class TileManager {
 		
 	}
 	
-	public static void createDiamondBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+	public void createMagmaBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+		
+		tile[4] = new Tile();
+		tile[4].collision = true;
+		
+		// Main Magma Block
+		graphics.setColor(magmaBlock);
+		graphics.fillRect(x, y, gp.tileSize, gp.tileSize);
+		
+		// Smaller pixels inside of Magma Block
+		graphics.setColor(darkerBrown1);
+		graphics.fillRect(x + 9, y + 9, 2, 2);
+		graphics.fillRect(x + 15, y + 15, 2, 2);
+		graphics.fillRect(x, y + 15, 2, 2);
+				   
+		graphics.setColor(orange);
+		graphics.fillRect(x + 11, y + 9, 2, 2);
+		graphics.fillRect(x + 8, y + 8, 2, 2);
+		graphics.fillRect(x + 8, y + 11, 2, 2);
+		graphics.fillRect(x + 18, y + 9, 2, 2);
+		graphics.fillRect(x + 9, y + 4, 2, 2);
+		graphics.fillRect(x + 5, y + 5, 2, 2);
+		graphics.fillRect(x + 6, y + 17, 2, 2);
+		graphics.fillRect(x + 17, y + 10, 1, 2);
+		graphics.fillRect(x + 15, y + 17, 2, 2);
+				   
+		graphics.setColor(darkOrange);
+		graphics.fillRect(x + 18, y + 6, 2, 3);
+		graphics.fillRect(x + 17, y + 6, 2, 2);
+		graphics.fillRect(x + 2, y + 6, 2, 4);
+		graphics.fillRect(x + 5, y + 3, 2, 2);
+		graphics.fillRect(x + 3, y + 4, 2, 3);
+		graphics.fillRect(x + 4, y + 7, 4, 2);
+		graphics.fillRect(x + 8, y + 6, 4, 2);
+		graphics.fillRect(x + 13, y + 15, 2, 3);
+		graphics.fillRect(x, y + 13, 3, 2);
+		graphics.fillRect(x + 14,  y, 4, 2);
+		graphics.fillRect(x + 8, y + 13, 4, 2);
+		graphics.fillRect(x + 7, y + 9, 1, 4);
+		graphics.fillRect(x + 5, y + 15, 4, 2);
+		graphics.fillRect(x + 18, y + 12, 2, 2);
+		
+	}
+	   
+	public void createNetherBrick(Graphics2D graphics, int x, int y, GamePanel gp) {
+		
+		tile[5] = new Tile();
+		tile[5].collision = true;
+		
+		// Main Nether Brick Block
+		graphics.setColor(netherBrick);
+		graphics.fillRect(x, y, gp.tileSize, gp.tileSize);
+		
+		// Smaller pixels inside of Nether Brick
+		graphics.setColor(netherDarkerBrown);
+		graphics.fillRect(x, y, gp.tileSize, 2);
+		graphics.fillRect(x, y + 6, gp.tileSize, 2);
+		graphics.fillRect(x, y + 12, gp.tileSize, 2);
+		graphics.fillRect(x, y + 18, gp.tileSize, 2);
+		
+		graphics.fillRect(x + 8, y + 1, 2, 5);
+		graphics.fillRect(x + 16, y + 1, 2, 5);
+		
+		graphics.fillRect(x + 6, y + 7, 2, 5);
+		graphics.fillRect(x + 14, y + 7, 2, 5);
+		
+		graphics.fillRect(x + 4, y + 13, 2, 5);
+		graphics.fillRect(x + 12, y + 13, 2, 5);
+		
+		graphics.setColor(netherLigherBrown);
+		graphics.fillRect(x, y + 2, 2, 2);
+		graphics.fillRect(x + 4, y + 2, 2, 2);
+		graphics.fillRect(x + 14, y + 2, 2, 2);
+		graphics.fillRect(x + 2, y + 4, 2, 2);
+		graphics.fillRect(x + 18, y + 4, 2, 2);
+		graphics.fillRect(x + 6, y + 4, 2, 2);
+		
+		graphics.fillRect(x + 12, y + 8, 2, 2);
+		graphics.fillRect(x + 2, y + 8, 2, 2);
+		graphics.fillRect(x + 16, y + 10, 2, 2);
+		graphics.fillRect(x + 8, y + 10, 2, 2);
+		graphics.fillRect(x + 10, y + 10, 2, 2);
+		
+		graphics.fillRect(x + 2, y + 14, 2, 2);
+		graphics.fillRect(x + 14, y + 14, 2, 2);
+		graphics.fillRect(x + 18, y + 14, 2, 2);
+		graphics.fillRect(x, y + 16, 2, 2);
+		graphics.fillRect(x + 6, y + 16, 2, 2);
+		graphics.fillRect(x + 10, y + 16, 2, 2);
+
+	}
+	
+	public void createDiamondBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+		
+		tile[6] = new Tile();
+		tile[6].collision = false;
 			   
 		// Main Diamond Block
 		graphics.setColor(stoneBlock);
@@ -383,7 +449,11 @@ public class TileManager {
 		   
 	}
 	
-	public static void createStoneBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+	public void createStoneBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
+		
+		tile[7] = new Tile();
+		tile[7].collision = false;
+		
 		// Main Diamond Block
 		graphics.setColor(stoneBlock);
 		graphics.fillRect(x, y, gp.tileSize, gp.tileSize);
@@ -415,42 +485,4 @@ public class TileManager {
 		graphics.fillRect(x + 9, y, 4, 2);	
 	}
 	
-	public static void createDarkPrismarineBlock(Graphics2D graphics, int x, int y, GamePanel gp) {
-		// Main Dark Prismarine Block
-		graphics.setColor(darkPrismarineBlock);
-		graphics.fillRect(x, y, gp.tileSize, gp.tileSize);
-
-		
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				// Smaller pixels inside of Diamond Block
-				graphics.setColor(lighterGreen1);
-				graphics.fillRect(x + 2 + (i * 6), y + (j * 6), 2, 2);
-				graphics.fillRect(x + (i * 6), y + 2 + (j * 6), 2, 2);
-
-				graphics.setColor(ligherGreen2);
-				graphics.fillRect(x + 4 + (i * 6), y + (j * 6), 2, 2);
-				graphics.fillRect(x + 2 + (i * 6), y + 2 + (j * 6), 2, 2);
-				graphics.fillRect(x + (i * 6), y + 4 + (j * 6), 2, 2);
-				
-				graphics.setColor(darkerGreen2);
-				graphics.fillRect(x + 6 + (i * 6), y + 2 + (j * 6), 2, 2);
-				graphics.fillRect(x + 6 + (i * 6), y + 4 + (j * 6), 2, 2);
-				graphics.fillRect(x + 2 + (i * 6), y + 6 + (j * 6), 2, 2);
-				graphics.fillRect(x + 4 + (i * 6), y + 6 + (j * 6), 2, 2);
-				
-				graphics.setColor(darkerGreen1);
-				graphics.fillRect(x + (i * 6), y + 6 + (j * 6), 2, 2);
-				graphics.fillRect(x + 6 + (i * 6), y + (j * 6), 2, 2);
-				graphics.fillRect(x + 6 + (i * 6), y + 6 + (j * 6), 2, 2);
-				
-				graphics.setColor(fungusGreen);
-				graphics.fillRect(x + 4 + (i * 6), y + 2 + (j * 6), 2, 2);
-				graphics.fillRect(x + 4 + (i * 6), y + 4 + (j * 6), 2, 2);
-				graphics.fillRect(x + 2 + (i * 6), y + 6 + (j * 6), 2, 2);
-			}
-		}
-
-	}
-
 }

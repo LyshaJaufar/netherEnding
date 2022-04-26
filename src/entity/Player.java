@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import game.GamePanel;
 import game.KeyHandler;
@@ -14,6 +15,8 @@ public class Player extends Entity {
 		this.gp = gp;
 		this.keyH = keyH;
 		
+		solidArea = new Rectangle(1, 23, 4, 8);
+		
 		setDefaultValues();
 	}
 	
@@ -25,21 +28,39 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		if (keyH.upPressed == true) {
-			direction = "up";
-			y -= speed;
-		}
-		else if (keyH.downPressed == true) {
-			direction = "down";
-			y += speed;
-		}
-		else if (keyH.leftPressed == true) {
-			direction = "left";
-			x -= speed;
-		}
-		else if (keyH.rightPressed == true) {
-			direction = "right";
-			x += speed;
+		
+		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
+			if (keyH.upPressed == true) {
+				direction = "up";
+			}
+			else if (keyH.downPressed == true) {
+				direction = "down";
+			}
+			else if (keyH.leftPressed == true) {
+				direction = "left";
+			}
+			else if (keyH.rightPressed == true) {
+				direction = "right";
+			}
+			
+			collisionOn = false;
+			gp.collisionChecker.checkTile(this);
+			
+			// If collision is false, player can move
+			if (collisionOn == false) {
+				if (direction == "up") {
+					y -= speed;
+				}
+				else if (direction == "down") {
+					y += speed;
+				}
+				else if (direction == "left") {
+					x -= speed;
+				}
+				else if (direction == "right") {
+					x += speed;
+				}
+			}		
 		}
 	}
 

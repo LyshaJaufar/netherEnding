@@ -8,6 +8,7 @@ public class Entity {
 	
 	public String direction;
 	public Rectangle solidArea;
+	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
 	
 }

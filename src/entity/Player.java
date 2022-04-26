@@ -16,7 +16,8 @@ public class Player extends Entity {
 		this.keyH = keyH;
 		
 		solidArea = new Rectangle(1, 23, 4, 8);
-		
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 		setDefaultValues();
 	}
 	
@@ -43,8 +44,12 @@ public class Player extends Entity {
 				direction = "right";
 			}
 			
+			// Check Tile Collision
 			collisionOn = false;
 			gp.collisionChecker.checkTile(this);
+			
+			// Check Object Collision
+			int objIndex = gp.collisionChecker.checkObject(this, true);
 			
 			// If collision is false, player can move
 			if (collisionOn == false) {

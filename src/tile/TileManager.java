@@ -15,38 +15,38 @@ public class TileManager {
 	public Tile[] tile;
 	public int mapTileNum[][];
 	
-	static Color darkerGray1 = new Color(110, 110, 110);
-	static Color darkerGray2 = new Color(120, 120, 120);
-	static Color stoneBlock = new Color(140, 140, 140);
-	static Color lighterGray1 = new Color(150, 150, 150);
-	static Color lighterGray2 = new Color(165, 165, 165);
-	static Color diamondBlock = new Color(74, 255, 233);
+	public static Color darkerGray1 = new Color(110, 110, 110);
+	public static Color darkerGray2 = new Color(120, 120, 120);
+	public static Color stoneBlock = new Color(140, 140, 140);
+	public static Color lighterGray1 = new Color(150, 150, 150);
+	public static Color lighterGray2 = new Color(165, 165, 165);
+	public static Color diamondBlock = new Color(74, 255, 233);
 	
-	static Color lavaBlock = new Color(236, 60, 0);
-	static Color darkOrange = new Color(253, 95, 0);
-	static Color orange = new Color(251, 132, 0);
-	static Color fadedYellow = new Color(255, 200, 9);
-	static Color brightYellow = new Color(255, 242, 85);
+	public static Color lavaBlock = new Color(236, 60, 0);
+	public static Color darkOrange = new Color(253, 95, 0);
+	public static Color orange = new Color(251, 132, 0);
+	public static Color fadedYellow = new Color(255, 200, 9);
+	public static Color brightYellow = new Color(255, 242, 85);
 	
-	static Color darkPrismarineBlock = new Color(13, 120, 115);
-	static Color lighterGreen1 = new Color(0, 86, 63);
-	static Color ligherGreen2 = new Color(21, 79, 76);
-	static Color fungusGreen = new Color(0, 66, 36);
-	static Color darkerGreen1 = new Color(18, 53, 36);
-	static Color darkerGreen2 = new Color(1, 50, 32);
+	public static Color darkPrismarineBlock = new Color(13, 120, 115);
+	public static Color lighterGreen1 = new Color(0, 86, 63);
+	public static Color ligherGreen2 = new Color(21, 79, 76);
+	public static Color fungusGreen = new Color(0, 66, 36);
+	public static Color darkerGreen1 = new Color(18, 53, 36);
+	public static Color darkerGreen2 = new Color(1, 50, 32);
 	
-	static Color magmaBlock = new Color(62, 6, 6);
-	static Color darkerBrown1 = new Color(92, 14, 14);
+	public static Color magmaBlock = new Color(62, 6, 6);
+	public static Color darkerBrown1 = new Color(92, 14, 14);
 	
-	static Color netherBrick = new Color(114,50,50);
-	static Color netherDarkerBrown = new Color(81,21,21);
-	static Color netherLigherBrown = new Color(150, 69, 69);
+	public static Color netherBrick = new Color(114,50,50);
+	public static Color netherDarkerBrown = new Color(81,21,21);
+	public static Color netherLigherBrown = new Color(150, 69, 69);
 	
-	static Color netherrackBlock = new Color(138, 84, 81);
-	static Color reddishOrange = new Color(122, 17, 17);
-	static Color netherrackPeach = new Color(214, 137, 133);
+	public static Color netherrackBlock = new Color(138, 84, 81);
+	public static Color reddishOrange = new Color(122, 17, 17);
+	public static Color netherrackPeach = new Color(214, 137, 133);
 	
-	static Color bedrockBlock = Color.GRAY;
+	public static Color bedrockBlock = Color.GRAY;
 	
 	
 	public TileManager(GamePanel gp) {
@@ -306,7 +306,6 @@ public class TileManager {
 		graphics.fillRect(x + 8, y + 12, 2, 2);
 		graphics.fillRect(x+18, y + 8, 2, 4);
 
-		
 	}
 	
 	public void createMagmaBlock(Graphics2D graphics, int x, int y, GamePanel gp) {

@@ -66,6 +66,73 @@ public class CollisionChecker {
 				entity.collisionOn = true;
 			}
 		}
-
+	}
+	
+	public int checkObject(Entity entity, boolean player) {
+		int index = 999;
+		
+		for (int i = 0; i < gp.obj.length; i++) {
+			if (gp.obj[i] != null) {
+				
+				// Get entity's solid area pst
+				entity.solidArea.x += entity.x;
+				entity.solidArea.y += entity.y;
+				
+				// Get the object's solid area pst
+				gp.obj[i].solidArea.x += gp.obj[i].x;
+				gp.obj[i].solidArea.y += gp.obj[i].y;
+				
+				if (entity.direction == "up") {
+					entity.solidArea.y -= entity.speed;
+					if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
+						if (gp.obj[i].collision == true) {
+							entity.collisionOn = true;
+						}
+						if (player == true) {
+							index = i;
+						}
+					}
+				}
+				if (entity.direction == "down") {
+					entity.solidArea.y += entity.speed;
+					if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
+						if (gp.obj[i].collision == true) {
+							entity.collisionOn = true;
+						}
+						if (player == true) {
+							index = i;
+						}
+					}
+				}
+				if (entity.direction == "left") {
+					entity.solidArea.x -= entity.speed;
+					if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
+						if (gp.obj[i].collision == true) {
+							entity.collisionOn = true;
+						}
+						if (player == true) {
+							index = i;
+						}
+					}
+				}
+				if (entity.direction == "right") {
+					entity.solidArea.x += entity.speed;
+					if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
+						if (gp.obj[i].collision == true) {
+							entity.collisionOn = true;
+						}
+						if (player == true) {
+							index = i;
+						}
+					}
+				}
+				entity.solidArea.x = entity.solidAreaDefaultX;
+				entity.solidArea.y = entity.solidAreaDefaultY;
+				gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
+				gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
+			}
+		}
+		
+		return index;
 	}
 }

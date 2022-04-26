@@ -11,10 +11,6 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class Main extends JPanel {
-   private static final int RECT_X = 200;
-   private static final int RECT_Y = RECT_X;
-   private static final int RECT_WIDTH = 300;
-   private static final int RECT_HEIGHT = RECT_WIDTH;
       
    static Color zombieBody = new Color(101, 235, 205);
    static Color zombieHead = new Color(115, 167, 56);
@@ -37,6 +33,7 @@ public class Main extends JPanel {
       window.setLocationRelativeTo(null);
       window.setVisible(true);
       
+      gamePanel.setUpGame();
       gamePanel.startGameThread();
    }
   

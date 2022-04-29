@@ -8,11 +8,15 @@ import game.GamePanel;
 import game.KeyHandler;
 
 public class Player extends Entity {
-	GamePanel gp;
+
+	public static String name = "Player";
 	KeyHandler keyH;
+
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
-		this.gp = gp;
+		
+		super(gp, name);
+
 		this.keyH = keyH;
 		
 		solidArea = new Rectangle(1, 23, 4, 8);

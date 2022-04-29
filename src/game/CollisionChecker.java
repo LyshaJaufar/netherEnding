@@ -1,6 +1,7 @@
 package game;
 
 import entity.Entity;
+import entity.Player;
 
 public class CollisionChecker {
 	GamePanel gp;
@@ -21,6 +22,8 @@ public class CollisionChecker {
 		int entityTopRow = entityTopY/gp.tileSize;
 		int entityBottomRow = entityBottomY/gp.tileSize;
 		
+		gp.tileM.loadMap();
+
 		int tileNum1, tileNum2;
 				
 		if (entity.direction == "up") {
@@ -28,7 +31,7 @@ public class CollisionChecker {
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-			
+
 			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
 				entity.collisionOn = true;
 			}
@@ -39,7 +42,7 @@ public class CollisionChecker {
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-			
+
 			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
 				entity.collisionOn = true;
 			}
@@ -135,4 +138,5 @@ public class CollisionChecker {
 		
 		return index;
 	}
+
 }

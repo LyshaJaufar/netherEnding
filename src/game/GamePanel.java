@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -27,9 +28,12 @@ public class GamePanel extends JPanel implements Runnable {
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread;
+	
+	// Player, Objects & Enemies
 	Player player = new Player(this, keyH);
 	public CollisionChecker collisionChecker = new CollisionChecker(this);
-	public SuperObject obj[] = new SuperObject[10];
+	public SuperObject obj[] = new SuperObject[20];
+	public Entity mob[] = new Entity[10];
 	public AssetSetter aSetter = new AssetSetter(this);
  	
 	// Set player's default positions
@@ -47,6 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void setUpGame() {
 		aSetter.setObject();
+		aSetter.setMob();
 	}
 	   
 	public void startGameThread() {
@@ -78,6 +83,8 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void update() {
 		player.update();
+		mob[0].update();
+		mob[1].update();
 	}	
 	
 	public void paintComponent(Graphics g) {
@@ -89,6 +96,9 @@ public class GamePanel extends JPanel implements Runnable {
 		obj[0].draw(g2, this, 14, 16);
 		obj[1].draw(g2, this, 17, 14);
 		obj[2].draw(g2, this, 20, 15);
+		
+		mob[0].draw(g2, this);
+		mob[1].draw(g2, this);
 		
 		player.draw(g2);
 		

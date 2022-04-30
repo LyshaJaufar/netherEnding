@@ -31,31 +31,31 @@ public class Entity {
 		
 	}
 	
-	public void setAction() {}
-	public void update() {
+	public void setAction(int currentPstX, int currentPstY, int targetX, int targetY) {}
+	public void update(int currentPstX, int currentPstY, int targetX, int targetY) {
 
-		setAction();
+		setAction(currentPstX, currentPstY, targetX, targetY);
 		
 		collisionOn = false;
 		gp.collisionChecker.checkTile(this);
 		gp.collisionChecker.checkEntity(this, gp.mob);
-		
-		System.out.println(direction);
-		System.out.println(collisionOn);
-		if (collisionOn == false) {
-			if (direction == "up") {
-				y -= speed;
-			}
-			else if (direction == "down") {
-				y += speed;
-			}
-			else if (direction == "left") {
+
+		if (collisionOn == false && currentPstX-1 != targetX) {
+			if (direction == "left") {
 				x -= speed;
 			}
 			else if (direction == "right") {
 				x += speed;
 			}
 		}	
+		else if (collisionOn == false && currentPstX-1 == targetX) {
+			if (direction == "up") {
+				y -= speed;
+			}
+			else if (direction == "down") {
+				y += speed;
+			}
+		}
 	}
 
 }

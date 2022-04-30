@@ -56,13 +56,32 @@ public class ZombiePigman extends Entity {
 		createZombiePigman(graphics, gp);
 	}
 	
-	public void setAction() {
+	public void setAction(int currentPstX, int currentPstY, int targetX, int targetY) {
 
 		actionLockCounter++;
-		
-		
+
 		if (actionLockCounter == 120) {
 
+			if (currentPstX != targetX || currentPstY != targetY) {
+	
+				if (currentPstX-1 > targetX) {
+					direction = "left";
+				}
+				else if (currentPstX < targetX) {
+					direction = "right";
+				} 
+				else if (currentPstX-1 == targetX) {
+					if (currentPstY > targetX) {
+						direction = "up";
+					}
+					else if (currentPstY < targetY) {
+						direction = "down";
+					}
+				}
+				actionLockCounter = 0;
+			}
+			
+			/*
 			Random random = new Random();
 			int randomDirection = random.nextInt(100) + 1;
 
@@ -78,8 +97,8 @@ public class ZombiePigman extends Entity {
 			else if (randomDirection > 75 && randomDirection <= 100) {
 				direction = "right";
 			}
-			
-			actionLockCounter = 0;
+			*/
+		
 		}		
 
 		

@@ -55,6 +55,9 @@ public class Player extends Entity {
 			// Check Object Collision
 			int objIndex = gp.collisionChecker.checkObject(this, true);
 			
+			// Check Mob Collision
+			int monsterIndex = gp.collisionChecker.checkEntity(this, gp.mob);
+			
 			// If collision is false, player can move
 			if (collisionOn == false) {
 				if (direction == "up") {

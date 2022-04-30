@@ -37,9 +37,11 @@ public class Entity {
 		setAction();
 		
 		collisionOn = false;
-		
 		gp.collisionChecker.checkTile(this);
+		gp.collisionChecker.checkEntity(this, gp.mob);
 		
+		System.out.println(direction);
+		System.out.println(collisionOn);
 		if (collisionOn == false) {
 			if (direction == "up") {
 				y -= speed;

@@ -6,4 +6,5 @@ public class Obj_House extends SuperObject {
 		name = "House";
 		collision = true;
 	}
+	
 }

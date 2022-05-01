@@ -18,6 +18,11 @@ public class Entity {
 	public Rectangle solidArea = new Rectangle(0,0,30,35);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
+	public boolean collisionUpOn = false;
+	public boolean collisionDownOn = false;
+	public boolean collisionLeftOn = false;
+	public boolean collisionRightOn = false;
+	boolean findingGate = false;
 	
 	public ZombiePigman zombiePigman;
 	
@@ -31,16 +36,19 @@ public class Entity {
 		
 	}
 	
-	public void setAction(int currentPstX, int currentPstY, int targetX, int targetY) {}
+	public void setAction(int currentPstX, int currentPstY, int targetX, int targetY, int col, int row) {}
 	public void update(int currentPstX, int currentPstY, int targetX, int targetY) {
 
-		setAction(currentPstX, currentPstY, targetX, targetY);
+		int col = gp.collisionChecker.getCol(gp, this);
+		int row = gp.collisionChecker.getRow(gp, this);
+		setAction(currentPstX, currentPstY, targetX, targetY, col, row);
 		
 		collisionOn = false;
 		gp.collisionChecker.checkTile(this);
 		gp.collisionChecker.checkEntity(this, gp.mob);
-
-		if (collisionOn == false && currentPstX-1 != targetX) {
+		
+	
+		if (collisionOn == false && currentPstX-1 != targetX && findingGate == false) {
 			if (direction == "left") {
 				x -= speed;
 			}
@@ -48,7 +56,7 @@ public class Entity {
 				x += speed;
 			}
 		}	
-		else if (collisionOn == false && currentPstX-1 == targetX) {
+		else if (collisionOn == false && currentPstX-1 == targetX && findingGate == false) {
 			if (direction == "up") {
 				y -= speed;
 			}
@@ -56,6 +64,31 @@ public class Entity {
 				y += speed;
 			}
 		}
+		else if (collisionDownOn == true) {
+			if (currentPstX-1 != 20*gp.tileSize) {
+				direction = "right";
+				x += speed;
+				findingGate = true;
+			}
+		}
+		if (findingGate == true && currentPstX-1 == 20 * gp.tileSize && collisionOn == false) {
+			if (currentPstY+10 != targetY) {
+				direction = "down";
+				y += speed;
+			}
+			else {
+				
+				System.out.println(currentPstX);
+				System.out.println("target: " + targetX);
+				if (currentPstX != targetX) {
+
+					direction = "left";
+					x -= speed;
+				}
+			}
+
+		}
+
 	}
 
 }

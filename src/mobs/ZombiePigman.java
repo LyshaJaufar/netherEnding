@@ -33,7 +33,7 @@ public class ZombiePigman extends Entity {
 		
 		speed = 1;
 		
-		solidArea = new Rectangle(1, 23, 48, 48);
+		solidArea = new Rectangle(1, 23, 20, 20);
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
@@ -56,14 +56,16 @@ public class ZombiePigman extends Entity {
 		createZombiePigman(graphics, gp);
 	}
 	
-	public void setAction(int currentPstX, int currentPstY, int targetX, int targetY) {
+	public void setAction(int currentPstX, int currentPstY, int targetX, int targetY, int col, int row) {
 
 		actionLockCounter++;
 
 		if (actionLockCounter == 120) {
 
+
+			
 			if (currentPstX != targetX || currentPstY != targetY) {
-	
+				
 				if (currentPstX-1 > targetX) {
 					direction = "left";
 				}
@@ -80,6 +82,7 @@ public class ZombiePigman extends Entity {
 				}
 				actionLockCounter = 0;
 			}
+			
 			
 			/*
 			Random random = new Random();

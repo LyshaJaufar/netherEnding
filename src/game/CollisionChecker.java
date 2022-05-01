@@ -31,20 +31,25 @@ public class CollisionChecker {
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+ 
+			//System.out.println(gp.tileM.tile[tileNum1].collision);
 
 			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
 				entity.collisionOn = true;
+				entity.collisionUpOn = false;
 			}
 		}
 		
 		else if (entity.direction == "down") {
+						
 			entityBottomRow = (entityBottomY + entity.speed)/gp.tileSize;
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-
+			
 			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
 				entity.collisionOn = true;
+				entity.collisionDownOn = true;
 			}
 		}
 		
@@ -56,6 +61,7 @@ public class CollisionChecker {
 			
 			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
 				entity.collisionOn = true;
+				entity.collisionLeftOn = true;
 			}
 		}
 		
@@ -67,6 +73,7 @@ public class CollisionChecker {
 			
 			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
 				entity.collisionOn = true;
+				entity.collisionRightOn = true;
 			}
 		}
 	}
@@ -158,5 +165,13 @@ public class CollisionChecker {
 			}
 		}
 		return index;		
+	}
+	
+	public int getCol(GamePanel gp, Entity entity) {
+		return entity.x/gp.tileSize;		
+	}
+	
+	public int getRow(GamePanel gp, Entity entity) {
+		return entity.y/gp.tileSize;
 	}
 }

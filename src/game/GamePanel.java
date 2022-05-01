@@ -83,7 +83,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void update() {
 		player.update();
-		mob[0].update(mob[0].x, mob[0].y, obj[0].x, obj[0].y);
+		//mob[0].update(mob[0].x, mob[0].y, obj[0].x, obj[0].y);
 		mob[1].update(mob[1].x, mob[1].y, obj[0].x, obj[0].y);
 	}	
 	

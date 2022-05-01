@@ -26,11 +26,11 @@ public class AssetSetter {
 	
 	public void setMob() {
 		gp.mob[0] = new ZombiePigman(gp, 0);
-		gp.obj[0].x = 14 * gp.tileSize;
-		gp.obj[0].y = 22 * gp.tileSize;
+		gp.mob[0].x = 14 * gp.tileSize;
+		gp.mob[0].y = 22 * gp.tileSize;
 		gp.mob[1] = new ZombiePigman(gp, 1);
-		gp.obj[1].x = 20 * gp.tileSize;
-		gp.obj[1].y = 6 * gp.tileSize;
+		gp.mob[1].x = 20 * gp.tileSize;
+		gp.mob[1].y = 6 * gp.tileSize;
 
 	}
 }

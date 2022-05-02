@@ -37,6 +37,7 @@ public class Player extends Entity {
 		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
 			if (keyH.upPressed == true) {
 				direction = "up";
+				gp.aSetter.setMob();
 			}
 			else if (keyH.downPressed == true) {
 				direction = "down";

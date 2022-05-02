@@ -83,8 +83,12 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void update() {
 		player.update();
-		mob[0].update(mob[0].x, mob[0].y, obj[0].x, obj[0].y);
-		mob[1].update(mob[1].x, mob[1].y, obj[0].x, obj[0].y);
+
+		for (int i = 0; i < mob.length; i++) {
+			if (mob[i] != null) {
+				mob[i].update(mob[i].x, mob[i].y, obj[0].x, obj[0].y);
+			}
+		}
 	}	
 	
 	public void paintComponent(Graphics g) {
@@ -96,9 +100,12 @@ public class GamePanel extends JPanel implements Runnable {
 		obj[0].draw(g2, this, 14, 16);
 		obj[1].draw(g2, this, 17, 14);
 		obj[2].draw(g2, this, 20, 15);
-		
-		mob[0].draw(g2, this);
-		mob[1].draw(g2, this);
+
+		for (int i = 0; i < mob.length; i++) {
+			if (mob[i] != null) {
+				mob[i].draw(g2, this);
+			}
+		}
 		
 		player.draw(g2);
 		

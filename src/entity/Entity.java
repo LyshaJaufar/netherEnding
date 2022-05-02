@@ -53,7 +53,7 @@ public class Entity {
 		collisionOn = false;
 		gp.collisionChecker.checkTile(this);
 		gp.collisionChecker.checkEntity(this, gp.mob);
-		
+
 
 		// if mob is above or below the village, go up/down to the village at the point where the house is
 		if (collisionOn == false && currentPstX-1 != targetX && findingGate == false && !(row > 9 && row < 16)) {

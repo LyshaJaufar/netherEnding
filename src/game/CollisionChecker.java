@@ -22,58 +22,68 @@ public class CollisionChecker {
 		int entityTopRow = entityTopY/gp.tileSize;
 		int entityBottomRow = entityBottomY/gp.tileSize;
 		
-		gp.tileM.loadMap();
+		
 
 		int tileNum1, tileNum2;
 				
 		if (entity.direction == "up") {
+
 			entityTopRow = (entityTopY - entity.speed)/gp.tileSize;
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
  
-			//System.out.println(gp.tileM.tile[tileNum1].collision);
 
-			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
-				entity.collisionOn = true;
-				entity.collisionUpOn = true;
+			if (gp.tileM.tile[tileNum1] != null && gp.tileM.tile[tileNum2] != null) {
+				if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+					entity.collisionOn = true;
+					entity.collisionUpOn = true;
+				}
 			}
 		}
 		
 		else if (entity.direction == "down") {
-						
+
 			entityBottomRow = (entityBottomY + entity.speed)/gp.tileSize;
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 			
-			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
-				entity.collisionOn = true;
-				entity.collisionDownOn = true;
+			if (gp.tileM.tile[tileNum1] != null && gp.tileM.tile[tileNum2] != null) {
+				if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+					entity.collisionOn = true;
+					entity.collisionDownOn = true;
+				}
 			}
 		}
 		
 		else if (entity.direction == "left") {
+
 			entityLeftCol = (entityLeftX - entity.speed)/gp.tileSize;
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 			
-			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
-				entity.collisionOn = true;
-				entity.collisionLeftOn = true;
+			if (gp.tileM.tile[tileNum1] != null && gp.tileM.tile[tileNum2] != null) {
+				if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+					entity.collisionOn = true;
+					entity.collisionLeftOn = true;
+				}
 			}
 		}
 		
 		else if (entity.direction == "right") {
+
 			entityRightCol = (entityRightX + entity.speed)/gp.tileSize;
 			
 			tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
 			tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 			
-			if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
-				entity.collisionOn = true;
-				entity.collisionRightOn = true;
+			if (gp.tileM.tile[tileNum1] != null && gp.tileM.tile[tileNum2] != null) {
+				if (gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+					entity.collisionOn = true;
+					entity.collisionRightOn = true;
+				}
 			}
 		}
 	}

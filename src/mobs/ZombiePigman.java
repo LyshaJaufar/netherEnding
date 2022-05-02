@@ -33,7 +33,7 @@ public class ZombiePigman extends Entity {
 		
 		speed = 1;
 		
-		solidArea = new Rectangle(1, 23, 20, 20);
+		solidArea = new Rectangle(1, 35, 10, 7);
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		

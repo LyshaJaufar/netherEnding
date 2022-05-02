@@ -5,14 +5,13 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import game.GamePanel;
-import tile.Tile;
 import tile.TileManager;
 
 public class SuperObject {
 	public String name;
 	public boolean collision = false;
 	public int x, y;
-	public Rectangle solidArea = new Rectangle(0,0,25,25);
+	public Rectangle solidArea = new Rectangle(0,0,20,20);
 	public int solidAreaDefaultX = 0;
 	public int solidAreaDefaultY = 0;
 	

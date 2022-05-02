@@ -27,6 +27,9 @@ public class Entity {
 	boolean insideVillage = false;
 	boolean upperVillageBorder = false;
 	boolean lowerVillageBorder = false;
+	boolean leftVillageBorder = false;
+	boolean rightVillageBorder = false;
+	boolean fromSide = false;
 	
 	public ZombiePigman zombiePigman;
 	
@@ -52,8 +55,7 @@ public class Entity {
 		gp.collisionChecker.checkEntity(this, gp.mob);
 		
 
-
-		// if mob is above or below the village, go up/down to the village ath the point where the house is
+		// if mob is above or below the village, go up/down to the village at the point where the house is
 		if (collisionOn == false && currentPstX-1 != targetX && findingGate == false && !(row > 9 && row < 16)) {
 			if (direction == "left") {
 				x -= speed;
@@ -70,7 +72,19 @@ public class Entity {
 				y += speed;
 			}
 		}	
-		System.out.println(collisionDownOn);
+		
+		// if mob is to the left/right of the village, go up/down at the point where the house is
+		else if (row > 9 && row < 16) {
+			if (collisionOn == false && currentPstY != targetY && findingGate == false) {
+				
+				if (direction == "up") {
+					y -= speed;
+				}
+				else if (direction == "down") {
+					y += speed;
+				}
+			}
+		}
 		// mob has reached upper village border. move to the gate
 		if (collisionDownOn == true && insideVillage == false) {
 			if (currentPstX-1 != 20*gp.tileSize) {
@@ -87,6 +101,25 @@ public class Entity {
 				x += speed;
 				findingGate = true;
 				lowerVillageBorder = true;
+			}
+		}
+		// mob has reached left village border. move to the gate
+		if (collisionRightOn == true && insideVillage == false) {
+			if (currentPstY != 14*gp.tileSize) {
+				direction = "up";
+				y -= speed;
+				findingGate = true;
+				leftVillageBorder = true;	
+			}
+		}
+		// mob has reached right village border. move to the gate
+		if (collisionLeftOn == true && insideVillage == false) {
+	
+			if (currentPstY != 15*gp.tileSize) {
+				direction = "up";
+				y -= speed;
+				findingGate = true;
+				rightVillageBorder = true;	
 			}
 		}
 		// found gate from upper border. move into the village
@@ -117,13 +150,43 @@ public class Entity {
 				}
 			}
 		}
+		// found gate from left border. move into the village
+		if (findingGate == true && leftVillageBorder == true && currentPstY == 14 * gp.tileSize && collisionOn == false) {
+			fromSide = true;
+			if (currentPstX != targetX) {
+				direction = "right";
+				x += speed;
+			}
+			else {
+				insideVillage = true;
+				if (currentPstY != targetY) {
+					direction = "down";
+					y += speed;
+				}
+			}
+		}
+		// found gate from right border. move into the village
+		if (findingGate == true && rightVillageBorder == true && currentPstY == 15 * gp.tileSize) {
+			fromSide = true;
+			if (currentPstX-25 != targetX) {
+				direction = "left";
+				x -= speed;
+			}
+		}
 		// mob moves to house
-		if (insideVillage) {
+		if (insideVillage && !fromSide) {
 			if (currentPstX != targetX+gp.tileSize) {
 				direction = "left";
 				x -= speed;
 			}
 		}
+		else if (insideVillage && fromSide) {
+			if (currentPstY != targetY-5) {
+				direction = "down";
+				y+= speed;
+			}
+		}
+
 	}
 
 	

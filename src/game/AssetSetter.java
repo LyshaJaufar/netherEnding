@@ -29,8 +29,8 @@ public class AssetSetter {
 		gp.mob[0].x = 14 * gp.tileSize;
 		gp.mob[0].y = 22 * gp.tileSize;
 		gp.mob[1] = new ZombiePigman(gp, 1);
-		gp.mob[1].x = 20 * gp.tileSize;
-		gp.mob[1].y = 6 * gp.tileSize;
+		gp.mob[1].x = 25 * gp.tileSize;
+		gp.mob[1].y = 10 * gp.tileSize;
 
 	}
 }

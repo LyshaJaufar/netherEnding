@@ -23,7 +23,7 @@ public class ZombiePigman extends Entity {
 	int actionLockCounter = 0;
 	
 	int zombiePigmanXCoord[] = new int[] {14, 20};
-	int zombiePigmanYCoord[] = new int[] {22, 6};
+	int zombiePigmanYCoord[] = new int[] {25, 10};
 	int zombiePigmanCoordIndex = 0;
 
 
@@ -66,20 +66,29 @@ public class ZombiePigman extends Entity {
 			
 			if (currentPstX != targetX || currentPstY != targetY) {
 				
-				if (currentPstX-1 > targetX) {
-					direction = "left";
-				}
-				else if (currentPstX < targetX) {
-					direction = "right";
-				} 
-				else if (currentPstX-1 == targetX) {
-					if (currentPstY > targetX) {
+				if (row > 9 && row < 16) {
+					if (currentPstY > targetY) {
 						direction = "up";
 					}
 					else if (currentPstY < targetY) {
 						direction = "down";
 					}
 				}
+				else if (currentPstX-1 > targetX) {
+					direction = "left";
+				}
+				else if (currentPstX < targetX) {
+					direction = "right";
+				} 
+				else if (currentPstX-1 == targetX) {
+					if (currentPstY > targetY) {
+						direction = "up";
+					}
+					else if (currentPstY < targetY) {
+						direction = "down";
+					}
+				}
+
 				actionLockCounter = 0;
 			}
 			

@@ -11,7 +11,7 @@ public class Player extends Entity {
 
 	public static String name = "Player";
 	KeyHandler keyH;
-
+	int playerMovementCount = 1;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -35,9 +35,10 @@ public class Player extends Entity {
 	public void update() {
 		
 		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
+			playerMovementCount++;
 			if (keyH.upPressed == true) {
 				direction = "up";
-				gp.aSetter.setMob();
+				//gp.aSetter.setMob();
 			}
 			else if (keyH.downPressed == true) {
 				direction = "down";
@@ -74,6 +75,11 @@ public class Player extends Entity {
 					x += speed;
 				}
 			}		
+		}
+		
+		// Spawning system
+		if (playerMovementCount % 75 == 0) {
+			gp.aSetter.setMob();
 		}
 	}
 

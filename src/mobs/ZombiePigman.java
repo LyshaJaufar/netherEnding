@@ -22,11 +22,6 @@ public class ZombiePigman extends Entity {
 	
 	int actionLockCounter = 0;
 	
-	int zombiePigmanXCoord[] = new int[] {14, 20};
-	int zombiePigmanYCoord[] = new int[] {25, 10};
-	int zombiePigmanCoordIndex = 0;
-
-
 	public ZombiePigman(GamePanel gp, int index) {
 		
 		super(gp, name);
@@ -37,15 +32,13 @@ public class ZombiePigman extends Entity {
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
-		zombiePigmanCoordIndex = index;
-		
 		setDefaultValues(gp);
 	}
 	
 	public void setDefaultValues(GamePanel gp) {
 		
-		x = zombiePigmanXCoord[zombiePigmanCoordIndex] * gp.tileSize;
-		y = zombiePigmanYCoord[zombiePigmanCoordIndex] * gp.tileSize;
+		x = gp.aSetter.zombiePigmanXCoord[gp.aSetter.zombiePigmanCoordIndex] * gp.tileSize;
+		y = gp.aSetter.zombiePigmanYCoord[gp.aSetter.zombiePigmanCoordIndex] * gp.tileSize;
 		speed = 1;
 		direction = "left";	
 		
@@ -60,10 +53,7 @@ public class ZombiePigman extends Entity {
 
 		actionLockCounter++;
 
-		if (actionLockCounter == 120) {
-
-
-			
+		if (actionLockCounter == 120) {			
 			if (currentPstX != targetX || currentPstY != targetY) {
 				
 				if (row > 9 && row < 16) {
@@ -88,7 +78,6 @@ public class ZombiePigman extends Entity {
 						direction = "down";
 					}
 				}
-
 				actionLockCounter = 0;
 			}
 			

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Player player = new Player(this, keyH);
 	public CollisionChecker collisionChecker = new CollisionChecker(this);
 	public SuperObject obj[] = new SuperObject[20];
-	public Entity mob[] = new Entity[10];
+	public ArrayList<Entity> mob = new ArrayList<Entity>();
 	public AssetSetter aSetter = new AssetSetter(this);
  	
 	// Set player's default positions
@@ -51,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void setUpGame() {
 		aSetter.setObject();
-		aSetter.setMob();
+		//aSetter.setMob();
 	}
 	   
 	public void startGameThread() {
@@ -84,11 +85,12 @@ public class GamePanel extends JPanel implements Runnable {
 	public void update() {
 		player.update();
 
-		for (int i = 0; i < mob.length; i++) {
-			if (mob[i] != null) {
-				mob[i].update(mob[i].x, mob[i].y, obj[0].x, obj[0].y);
+		for (int i = 0; i < mob.size(); i++) {
+			if (mob.get(i) != null) {
+				mob.get(i).update(mob.get(i).x, mob.get(i).y, obj[0].x, obj[0].y);
 			}
 		}
+		
 	}	
 	
 	public void paintComponent(Graphics g) {
@@ -100,10 +102,10 @@ public class GamePanel extends JPanel implements Runnable {
 		obj[0].draw(g2, this, 14, 16);
 		obj[1].draw(g2, this, 17, 14);
 		obj[2].draw(g2, this, 20, 15);
-
-		for (int i = 0; i < mob.length; i++) {
-			if (mob[i] != null) {
-				mob[i].draw(g2, this);
+		
+		for (int i = 0; i < mob.size(); i++) {
+			if (mob.get(i) != null) {
+				mob.get(i).draw(g2, this);
 			}
 		}
 		

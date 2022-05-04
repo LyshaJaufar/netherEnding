@@ -108,7 +108,7 @@ public class ZombiePigman extends Entity {
 	public void createZombiePigman(Graphics2D graphics, GamePanel gp) {
 		
 		int pixel = 2;
-
+		
 		if (direction == "down") {
 			
 			graphics.setColor(zombieVeryLightGreen);

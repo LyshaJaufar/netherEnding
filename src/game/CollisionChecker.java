@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entity.Entity;
 import entity.Player;
+import object.SuperObject;
 
 public class CollisionChecker {
 	GamePanel gp;
@@ -132,7 +133,7 @@ public class CollisionChecker {
 				gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
 			}
 		}
-		
+
 		return index;
 	}
 	

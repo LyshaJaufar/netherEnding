@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import game.GamePanel;
 import mobs.ZombiePigman;
+import object.SuperObject;
 
 public class Entity {
 	
@@ -31,6 +32,7 @@ public class Entity {
 	boolean rightVillageBorder = false;
 	boolean fromSide = false;
 	
+	
 	public ZombiePigman zombiePigman;
 	
 	public Entity(GamePanel gp, String name) {
@@ -41,6 +43,23 @@ public class Entity {
 	public void draw(Graphics2D g2, GamePanel gamePanel) {
 		zombiePigman.createZombiePigman(g2, gp);
 		
+	}
+	
+	public void damageHouse(int objIndex) {
+		if (objIndex != 999 && gp.obj[objIndex].healthValue > 0) {
+			if (gp.obj[objIndex].invincible == true) {
+				gp.obj[objIndex].invincibleCounter++;
+				if (gp.obj[objIndex].invincibleCounter > 90) {
+					gp.obj[objIndex].invincible = false;
+					gp.obj[objIndex].invincibleCounter = 0;
+				}
+			}
+
+			if (gp.obj[objIndex].invincible == false) {
+				gp.obj[objIndex].healthValue--;
+				gp.obj[objIndex].invincible = true;
+			}
+		}
 	}
 	
 	public void setAction(int currentPstX, int currentPstY, int targetX, int targetY, int col, int row) {}
@@ -54,6 +73,8 @@ public class Entity {
 		gp.collisionChecker.checkTile(this);
 		gp.collisionChecker.checkEntity(this, gp.mob);
 
+		int objIndex = gp.collisionChecker.checkObject(this, true);
+		damageHouse(objIndex);
 
 		// if mob is above or below the village, go up/down to the village at the point where the house is
 		if (collisionOn == false && currentPstX-1 != targetX && findingGate == false && !(row > 9 && row < 16)) {

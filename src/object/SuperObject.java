@@ -11,9 +11,18 @@ public class SuperObject {
 	public String name;
 	public boolean collision = false;
 	public int x, y;
-	public Rectangle solidArea = new Rectangle(0,0,20,20);
+	
+	// House Health
+	public int healthValue;
+	public int maxHealthValue = 6;
+	public boolean invincible;
+	public int invincibleCounter;
+
+	// Collision Area
+	public Rectangle solidArea = new Rectangle(0,0,30,30);
 	public int solidAreaDefaultX = 0;
 	public int solidAreaDefaultY = 0;
+
 	
 	public void draw(Graphics2D g2, GamePanel gp, int x, int y) {
 		createVillageHouse(g2, x * gp.tileSize, y * gp.tileSize, gp);
@@ -22,6 +31,16 @@ public class SuperObject {
 	public void createVillageHouse(Graphics2D graphics, int x, int y, GamePanel gp) {
 
 		x += 4;
+				
+		// Health Bar
+		double oneScale = (double)(gp.tileSize+16)/maxHealthValue;
+		double hpBarValue = oneScale*healthValue;
+		
+		graphics.setColor(new Color(35, 35, 35));
+		graphics.fillRect(x-3, y + 24, gp.tileSize + 18, 8);
+		
+		graphics.setColor(new Color(255, 0, 30));
+		graphics.fillRect(x-2, y + 25, (int)hpBarValue, 6);
 		
 		// Main part of the house
 		// Main Bedrock Block

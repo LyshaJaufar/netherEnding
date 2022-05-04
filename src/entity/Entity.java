@@ -145,7 +145,7 @@ public class Entity {
 		}
 		// found gate from upper border. move into the village
 		if (findingGate == true && upperVillageBorder == true && currentPstX-1 == 20 * gp.tileSize && collisionOn == false) {
-			if (currentPstY+10 != targetY) {
+			if (currentPstY+10 < targetY) {
 				direction = "down";
 				y += speed;
 			}
@@ -159,7 +159,7 @@ public class Entity {
 		}
 		// found gate from lower border. move into the village
 		if (findingGate == true && lowerVillageBorder == true && currentPstX-1 == 16 * gp.tileSize && collisionOn == false) {
-			if (currentPstY != targetY-15) {
+			if (currentPstY > targetY-15) {
 				direction = "up";
 				y -= speed;
 			}
@@ -174,7 +174,7 @@ public class Entity {
 		// found gate from left border. move into the village
 		if (findingGate == true && leftVillageBorder == true && currentPstY == 14 * gp.tileSize && collisionOn == false) {
 			fromSide = true;
-			if (currentPstX != targetX) {
+			if (currentPstX < targetX) {
 				direction = "right";
 				x += speed;
 			}
@@ -189,7 +189,7 @@ public class Entity {
 		// found gate from right border. move into the village
 		if (findingGate == true && rightVillageBorder == true && currentPstY == 15 * gp.tileSize) {
 			fromSide = true;
-			if (currentPstX-25 != targetX) {
+			if (currentPstX-25 > targetX) {
 				direction = "left";
 				x -= speed;
 			}

@@ -119,7 +119,7 @@ public class CollisionChecker {
 				}
 				
 				if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
-					if (gp.obj[i].collision == true) {
+					if (gp.obj[i].collision == true && entity.name == "Player") {
 						entity.collisionOn = true;
 					}
 					if (player == true) {

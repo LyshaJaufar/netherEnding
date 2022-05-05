@@ -33,12 +33,17 @@ public class Player extends Entity {
 	}
 
 	public void update() {
-		
-		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
+		if (attacking) {
+			attacking();
+		}
+		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || 
+				keyH.rightPressed == true) {
 			playerMovementCount++;
+		}
+		if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || 
+				keyH.rightPressed == true || keyH.enterPressed == true) {
 			if (keyH.upPressed == true) {
 				direction = "up";
-				//gp.aSetter.setMob();
 			}
 			else if (keyH.downPressed == true) {
 				direction = "down";
@@ -48,6 +53,9 @@ public class Player extends Entity {
 			}
 			else if (keyH.rightPressed == true) {
 				direction = "right";
+			}
+			if (keyH.enterPressed == true) {
+				attacking = true;
 			}
 			
 			// Check Tile Collision
@@ -61,7 +69,7 @@ public class Player extends Entity {
 			int monsterIndex = gp.collisionChecker.checkEntity(this, gp.mob);
 			
 			// If collision is false, player can move
-			if (collisionOn == false) {
+			if (collisionOn == false && keyH.enterPressed == false) {
 				if (direction == "up") {
 					y -= speed;
 				}
@@ -82,6 +90,24 @@ public class Player extends Entity {
 			gp.aSetter.setMob();
 		}
 	}
+	
+	public void attacking() {
+		attackAnimationCounter++;
+		
+		if (attackAnimationCounter <= 5) {
+			attackAnimationNum = 1;
+		}
+
+		else if (attackAnimationCounter > 5 && attackAnimationCounter <= 25) {
+			attackAnimationNum = 2;
+		}
+		 
+		else if (attackAnimationCounter > 25) {
+			attackAnimationNum = 1;
+			attackAnimationCounter = 0;
+			attacking = false;
+		}
+	}
 
 	public void draw(Graphics2D g2) {
 		
@@ -89,6 +115,8 @@ public class Player extends Entity {
 		Color yellow = new Color(248, 234, 140);
 		Color darkYellow = new Color(214, 173, 96);
 		Color pink = new Color(251, 107, 144);
+		Color diamondSword = new Color(69,172,165);
+		Color swordHilt = new Color(122, 53, 13);
 
 		int pixelSize = 1;
 				
@@ -439,6 +467,729 @@ public class Player extends Entity {
 			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 29), pixelSize * 2, pixelSize * 4);
 			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 30), pixelSize * 2, pixelSize * 3);
 			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 31), pixelSize, pixelSize * 2);
+		}
+		
+		if (attacking == true && attackAnimationNum == 1 && direction == "left") {
+			g2.setColor(darkBlue);
+			g2.fillRect(x, y, (pixelSize * 2), pixelSize);		// Layer 1
+			g2.fillRect(x-(pixelSize * 2), y+pixelSize, (pixelSize * 6), pixelSize);
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 2), (pixelSize * 8), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 3), (pixelSize * 10), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+	
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 4), (pixelSize * 5), pixelSize);
+	
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 4), (pixelSize * 5), pixelSize);		
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 4), (pixelSize * 12), pixelSize);
+		
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 5), (pixelSize * 4), pixelSize);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize *5), (pixelSize * 4), pixelSize);
+		
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 7), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y + (pixelSize * 5), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize, pixelSize);
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);		
+			g2.fillRect(x+(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 2), y + (pixelSize * 5), pixelSize * 6, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 6), (pixelSize * 8), pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 6), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 6), (pixelSize), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize * 11, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 8), (pixelSize * 12), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 9), (pixelSize * 14), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 10), (pixelSize * 18), pixelSize * 4);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 4), pixelSize * 2);
+		
+			// Eyes
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 14), (pixelSize), pixelSize * 5);
+		
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 14), (pixelSize), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 18), (pixelSize), pixelSize * 2);
+		
+			g2.fillRect(x+(pixelSize*2), y+(pixelSize * 14), pixelSize * 2, pixelSize);
+			
+			g2.setColor(Color.WHITE);
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 14), (pixelSize * 4), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+		
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 17), (pixelSize * 2), pixelSize * 2);
+	
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 2), y+(pixelSize * 17), (pixelSize), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			// Mouth
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 17), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			
+			g2.setColor(yellow);
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 15), (pixelSize), pixelSize * 5);
+			g2.fillRect(x+(pixelSize * 2), y+(pixelSize * 18), (pixelSize), pixelSize * 2);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 19), (pixelSize * 6), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 16), (pixelSize * 4), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 16), (pixelSize * 6), pixelSize);
+	
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 17), (pixelSize * 3), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 17), (pixelSize * 5), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 18), (pixelSize), pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 18), (pixelSize * 3), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 19), (pixelSize), pixelSize);
+			
+			// Robe
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 10), pixelSize, pixelSize * 10);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 16), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 17), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 18), pixelSize, pixelSize * 3);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize * 2);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 19), pixelSize, pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 19), pixelSize, pixelSize*2);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 18), pixelSize, pixelSize*3);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 17), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize * 16), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 10), y+(pixelSize * 10), pixelSize, pixelSize*10);
+	
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 20), pixelSize * 10, pixelSize * 13);
+			
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 24), pixelSize * 2, pixelSize * 4);
+	
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 25), pixelSize, pixelSize * 8);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 26), pixelSize, pixelSize * 7);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 27), pixelSize, pixelSize * 6);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize * 29), pixelSize * 2, pixelSize * 4);
+			g2.fillRect(x+(pixelSize * 11), y+(pixelSize * 30), pixelSize * 2, pixelSize * 3);
+			g2.fillRect(x+(pixelSize * 13), y+(pixelSize * 31), pixelSize, pixelSize * 2);
+			
+			// Sword
+			g2.setColor(diamondSword);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 24), pixelSize * 2, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 25), pixelSize * 2, pixelSize * 2);
+		}
+		else if (attacking == true && direction == "right" && attackAnimationNum == 1) {
+			g2.setColor(darkBlue);
+			g2.fillRect(x, y, (pixelSize * 2), pixelSize);		// Layer 1
+			g2.fillRect(x-(pixelSize * 2), y+pixelSize, (pixelSize * 6), pixelSize);
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 2), (pixelSize * 8), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 3), (pixelSize * 10), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+	
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 4), (pixelSize * 5), pixelSize);
+	
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 4), (pixelSize * 5), pixelSize);		
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 4), (pixelSize * 12), pixelSize);
+		
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 5), (pixelSize * 4), pixelSize);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize *5), (pixelSize * 4), pixelSize);
+		
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 7), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y + (pixelSize * 5), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize, pixelSize);
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);		
+			g2.fillRect(x+(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 2), y + (pixelSize * 5), pixelSize * 6, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 6), (pixelSize * 8), pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 6), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 6), (pixelSize), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize * 11, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 8), (pixelSize * 12), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 9), (pixelSize * 14), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 10), (pixelSize * 18), pixelSize * 4);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 4), pixelSize * 2);
+		
+			// Eyes
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 14), (pixelSize), pixelSize * 5);
+		
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 14), (pixelSize), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 18), (pixelSize), pixelSize * 2);
+		
+			g2.fillRect(x+(pixelSize*4), y+(pixelSize * 14), pixelSize * 2, pixelSize);
+			
+			g2.setColor(Color.WHITE);
+			g2.fillRect(x, y+(pixelSize * 14), (pixelSize * 4), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+		
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 17), (pixelSize * 2), pixelSize * 2);
+	
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 17), (pixelSize), pixelSize);
+		
+			g2.fillRect(x, y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			
+			// Mouth
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x, y+(pixelSize * 17), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 16), (pixelSize), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 16), (pixelSize * 2), pixelSize * 2);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 16), (pixelSize * 2), pixelSize * 2);			
+
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 15), (pixelSize), pixelSize * 4);			
+
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 16), (pixelSize), pixelSize);			
+
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 18), (pixelSize), pixelSize);			
+
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 18), (pixelSize * 3), pixelSize);		
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 19), (pixelSize * 2), pixelSize);	
+			
+			g2.fillRect(x, y+(pixelSize * 19), (pixelSize * 5), pixelSize);	
+			
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 18), (pixelSize), pixelSize);	
+			
+			
+			// Robe
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 10), pixelSize, pixelSize * 10);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 16), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 17), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 18), pixelSize, pixelSize * 3);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize * 2);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 19), pixelSize, pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 19), pixelSize, pixelSize*2);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 18), pixelSize, pixelSize*3);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 17), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize * 16), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 10), y+(pixelSize * 10), pixelSize, pixelSize*10);
+	
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 20), pixelSize * 10, pixelSize * 13);
+			
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 24), pixelSize * 2, pixelSize * 4);
+	
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 25), pixelSize, pixelSize * 8);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 26), pixelSize, pixelSize * 7);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 27), pixelSize, pixelSize * 6);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 29), pixelSize * 2, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 30), pixelSize * 2, pixelSize * 3);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 31), pixelSize, pixelSize * 2);
+			
+			// Sword
+			g2.setColor(diamondSword);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 24), pixelSize * 2, pixelSize * 4);
+			g2.fillRect(x+(pixelSize * 10), y+(pixelSize * 25), pixelSize * 2, pixelSize * 2);
+		}
+		if (attacking == true && attackAnimationNum == 2 && direction == "left") {
+			g2.setColor(darkBlue);
+			g2.fillRect(x, y, (pixelSize * 2), pixelSize);		// Layer 1
+			g2.fillRect(x-(pixelSize * 2), y+pixelSize, (pixelSize * 6), pixelSize);
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 2), (pixelSize * 8), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 3), (pixelSize * 10), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+	
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 4), (pixelSize * 5), pixelSize);
+	
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 4), (pixelSize * 5), pixelSize);		
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 4), (pixelSize * 12), pixelSize);
+		
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 5), (pixelSize * 4), pixelSize);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize *5), (pixelSize * 4), pixelSize);
+		
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 7), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y + (pixelSize * 5), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize, pixelSize);
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);		
+			g2.fillRect(x+(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 2), y + (pixelSize * 5), pixelSize * 6, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 6), (pixelSize * 8), pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 6), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 6), (pixelSize), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize * 11, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 8), (pixelSize * 12), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 9), (pixelSize * 14), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 10), (pixelSize * 18), pixelSize * 4);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 4), pixelSize * 2);
+		
+			// Eyes
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 14), (pixelSize), pixelSize * 5);
+		
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 14), (pixelSize), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 18), (pixelSize), pixelSize * 2);
+		
+			g2.fillRect(x+(pixelSize*2), y+(pixelSize * 14), pixelSize * 2, pixelSize);
+			
+			g2.setColor(Color.WHITE);
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 14), (pixelSize * 4), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+		
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 17), (pixelSize * 2), pixelSize * 2);
+	
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 2), y+(pixelSize * 17), (pixelSize), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			// Mouth
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 17), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			
+			g2.setColor(yellow);
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 15), (pixelSize), pixelSize * 5);
+			g2.fillRect(x+(pixelSize * 2), y+(pixelSize * 18), (pixelSize), pixelSize * 2);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 19), (pixelSize * 6), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 16), (pixelSize * 4), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 16), (pixelSize * 6), pixelSize);
+	
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 17), (pixelSize * 3), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 17), (pixelSize * 5), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 18), (pixelSize), pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 18), (pixelSize * 3), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 19), (pixelSize), pixelSize);
+			
+			// Robe
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 10), pixelSize, pixelSize * 10);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 16), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 17), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 18), pixelSize, pixelSize * 3);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize * 2);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 19), pixelSize, pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 19), pixelSize, pixelSize*2);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 18), pixelSize, pixelSize*3);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 17), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize * 16), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 10), y+(pixelSize * 10), pixelSize, pixelSize*10);
+	
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 20), pixelSize * 10, pixelSize * 13);
+			
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 24), pixelSize * 2, pixelSize * 4);
+	
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 25), pixelSize, pixelSize * 8);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 26), pixelSize, pixelSize * 7);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 27), pixelSize, pixelSize * 6);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize * 29), pixelSize * 2, pixelSize * 4);
+			g2.fillRect(x+(pixelSize * 11), y+(pixelSize * 30), pixelSize * 2, pixelSize * 3);
+			g2.fillRect(x+(pixelSize * 13), y+(pixelSize * 31), pixelSize, pixelSize * 2);
+			
+			// Sword
+			g2.setColor(diamondSword);
+			g2.fillRect(x-(pixelSize * 21), y+(pixelSize * 24), pixelSize * 14, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 23), y+(pixelSize * 25), pixelSize * 2, pixelSize * 2);
+			
+			g2.setColor(swordHilt);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 24), pixelSize*2, pixelSize * 4);
+		}
+		else if (attacking == true && direction == "right" && attackAnimationNum == 2) {
+			g2.setColor(darkBlue);
+			g2.fillRect(x, y, (pixelSize * 2), pixelSize);		// Layer 1
+			g2.fillRect(x-(pixelSize * 2), y+pixelSize, (pixelSize * 6), pixelSize);
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 2), (pixelSize * 8), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 3), (pixelSize * 10), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 3), (pixelSize * 3), pixelSize);
+	
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 4), (pixelSize * 5), pixelSize);
+	
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 4), (pixelSize * 5), pixelSize);		
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 4), (pixelSize * 12), pixelSize);
+		
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 5), (pixelSize * 4), pixelSize);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize *5), (pixelSize * 4), pixelSize);
+		
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 7), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize * 3, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y + (pixelSize * 5), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y + (pixelSize * 5), pixelSize, pixelSize);
+			
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);		
+			g2.fillRect(x+(pixelSize * 4), y + (pixelSize * 5), pixelSize * 2, pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 2), y + (pixelSize * 5), pixelSize * 6, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 6), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 6), (pixelSize * 2), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 6), (pixelSize * 8), pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 6), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 6), (pixelSize), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 7), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize * 11, pixelSize);
+			
+			g2.setColor(darkYellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 7), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 7), pixelSize, pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 8), (pixelSize * 5), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 8), (pixelSize * 12), pixelSize);
+			
+			g2.setColor(pink);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 9), (pixelSize * 3), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 9), (pixelSize * 14), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 10), (pixelSize * 18), pixelSize * 4);
+			
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 4), pixelSize * 2);
+		
+			// Eyes
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 2);
+			
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 2), y+(pixelSize * 14), (pixelSize), pixelSize * 5);
+		
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 14), (pixelSize), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 18), (pixelSize), pixelSize * 2);
+		
+			g2.fillRect(x+(pixelSize*4), y+(pixelSize * 14), pixelSize * 2, pixelSize);
+			
+			g2.setColor(Color.WHITE);
+			g2.fillRect(x, y+(pixelSize * 14), (pixelSize * 4), pixelSize);
+		
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+		
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 17), (pixelSize * 2), pixelSize * 2);
+	
+			g2.fillRect(x-(pixelSize * 1), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 17), (pixelSize), pixelSize);
+		
+			g2.fillRect(x, y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 18), (pixelSize), pixelSize);
+		
+			
+			// Mouth
+			g2.setColor(Color.BLACK);
+			g2.fillRect(x+(pixelSize * 1), y+(pixelSize * 15), (pixelSize * 2), pixelSize * 2);
+			
+			g2.fillRect(x, y+(pixelSize * 17), (pixelSize), pixelSize);
+			g2.fillRect(x+(pixelSize * 3), y+(pixelSize * 17), (pixelSize), pixelSize);
+			
+			g2.setColor(yellow);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 14), (pixelSize * 2), pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 16), (pixelSize), pixelSize);
+			
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 16), (pixelSize * 2), pixelSize * 2);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 16), (pixelSize * 2), pixelSize * 2);			
+
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 15), (pixelSize), pixelSize * 4);			
+
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 16), (pixelSize), pixelSize);			
+
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 18), (pixelSize), pixelSize);			
+
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 18), (pixelSize * 3), pixelSize);		
+			
+			g2.fillRect(x-(pixelSize * 3), y+(pixelSize * 19), (pixelSize * 2), pixelSize);	
+			
+			g2.fillRect(x, y+(pixelSize * 19), (pixelSize * 5), pixelSize);	
+			
+			g2.fillRect(x+(pixelSize * 4), y+(pixelSize * 18), (pixelSize), pixelSize);	
+			
+			
+			// Robe
+			g2.setColor(darkBlue);
+			g2.fillRect(x-(pixelSize * 9), y+(pixelSize * 10), pixelSize, pixelSize * 10);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 16), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 17), pixelSize, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 18), pixelSize, pixelSize * 3);
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize * 2);
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 19), pixelSize, pixelSize);
+			
+			g2.fillRect(x+(pixelSize * 5), y+(pixelSize * 19), pixelSize, pixelSize);
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 19), pixelSize, pixelSize*2);
+			g2.fillRect(x+(pixelSize * 7), y+(pixelSize * 18), pixelSize, pixelSize*3);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 17), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 9), y+(pixelSize * 16), pixelSize, pixelSize*4);
+			g2.fillRect(x+(pixelSize * 10), y+(pixelSize * 10), pixelSize, pixelSize*10);
+	
+			g2.fillRect(x-(pixelSize * 4), y+(pixelSize * 20), pixelSize * 10, pixelSize * 13);
+			
+			g2.fillRect(x+(pixelSize * 6), y+(pixelSize * 24), pixelSize * 2, pixelSize * 4);
+	
+			g2.fillRect(x-(pixelSize * 5), y+(pixelSize * 25), pixelSize, pixelSize * 8);
+			g2.fillRect(x-(pixelSize * 6), y+(pixelSize * 26), pixelSize, pixelSize * 7);
+			g2.fillRect(x-(pixelSize * 7), y+(pixelSize * 27), pixelSize, pixelSize * 6);
+			g2.fillRect(x-(pixelSize * 8), y+(pixelSize * 29), pixelSize * 2, pixelSize * 4);
+			g2.fillRect(x-(pixelSize * 10), y+(pixelSize * 30), pixelSize * 2, pixelSize * 3);
+			g2.fillRect(x-(pixelSize * 11), y+(pixelSize * 31), pixelSize, pixelSize * 2);
+			
+			// Sword
+			g2.setColor(swordHilt);
+			g2.fillRect(x+(pixelSize * 8), y+(pixelSize * 24), pixelSize*2, pixelSize * 4);
+
+			g2.setColor(diamondSword);
+			g2.fillRect(x+(pixelSize * 10), y+(pixelSize * 24), pixelSize * 14, pixelSize * 4);
+			g2.fillRect(x+(pixelSize * 24), y+(pixelSize * 25), pixelSize * 2, pixelSize * 2);
 		}
 	}
 }

@@ -33,6 +33,9 @@ public class ZombiePigman extends Entity {
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		
+		maxLife = 4;
+		life = maxLife;
+		
 		setDefaultValues(gp);
 	}
 	

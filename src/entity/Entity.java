@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 
 import game.GamePanel;
 import mobs.ZombiePigman;
-import object.SuperObject;
 
 public class Entity {
 	
@@ -18,6 +17,7 @@ public class Entity {
 	public String name;
 	public Rectangle solidArea = new Rectangle(0,0,30,35);
 	public int solidAreaDefaultX, solidAreaDefaultY;
+	
 	public boolean collisionOn = false;
 	public boolean collisionUpOn = false;
 	public boolean collisionDownOn = false;
@@ -32,6 +32,12 @@ public class Entity {
 	boolean rightVillageBorder = false;
 	boolean fromSide = false;
 		
+	public int maxLife;
+	public int life;
+	
+	public boolean attacking = false;
+	public int attackAnimationCounter = 0;
+	public int attackAnimationNum = 0;
 	
 	public ZombiePigman zombiePigman;
 	
@@ -295,6 +301,5 @@ public class Entity {
 		}
 
 	}
-
 	
 }

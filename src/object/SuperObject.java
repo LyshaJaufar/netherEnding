@@ -17,6 +17,7 @@ public class SuperObject {
 	public int maxHealthValue = 6;
 	public boolean invincible;
 	public int invincibleCounter;
+	public boolean destroyed;
 
 	// Collision Area
 	public Rectangle solidArea = new Rectangle(0,0,30,30);

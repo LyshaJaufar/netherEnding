@@ -59,6 +59,8 @@ public class Entity {
 				gp.obj[objIndex].healthValue--;
 				gp.obj[objIndex].invincible = true;
 			}
+		} else if (objIndex != 999 && gp.obj[objIndex].healthValue == 0) {
+			gp.obj[objIndex].destroyed = true;
 		}
 	}
 	
@@ -73,8 +75,16 @@ public class Entity {
 		int firstTargetX = gp.obj[0].x;
 		int firstTargetY = gp.obj[0].y;
 		
-		//targetX = gp.obj[1].x;
-		//targetY = gp.obj[1].y;
+		// Choose which house to attack
+		if (gp.obj[0].destroyed == true && gp.obj[1].destroyed == false) {
+			targetX = gp.obj[1].x;
+			targetY = gp.obj[1].y;
+		}
+		else if (gp.obj[1].destroyed == true) {
+			targetX = gp.obj[2].x;
+			targetY = gp.obj[2].y;
+		}
+
 		
 		int col = gp.collisionChecker.getCol(gp, this);
 		int row = gp.collisionChecker.getRow(gp, this);

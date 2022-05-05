@@ -21,6 +21,7 @@ public class ZombiePigman extends Entity {
 	public static String name = "Zombie Pigman";
 	
 	int actionLockCounter = 0;
+
 	
 	public ZombiePigman(GamePanel gp, int index) {
 		
@@ -80,7 +81,6 @@ public class ZombiePigman extends Entity {
 				}
 				actionLockCounter = 0;
 			}
-			
 			
 			/*
 			Random random = new Random();

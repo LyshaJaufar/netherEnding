@@ -42,6 +42,16 @@ public class KeyHandler implements KeyListener{
 					gp.gameState = gp.playState;
 				}	
 			}
+			if (code == KeyEvent.VK_ENTER) {
+				if (gp.ui.commandNum == 1) {
+					gp.gameState = gp.upgradeState;
+				}	
+			}
+			if (code == KeyEvent.VK_ENTER) {
+				if (gp.ui.commandNum == 2) {
+					gp.gameState = gp.infoState;
+				}	
+			}
 		}
 		
 		// PLAY STATE
@@ -72,7 +82,7 @@ public class KeyHandler implements KeyListener{
 				}				
 			}
 			if (code == KeyEvent.VK_A) {
-				if (gp.ui.commandNum < 2) {
+				if (gp.ui.commandNum < 1) {
 					gp.ui.commandNum++;
 				}	
 			}
@@ -81,6 +91,20 @@ public class KeyHandler implements KeyListener{
 					gp.gameState = gp.menuState;
 					Main.main(null);
 				}	
+			}
+		}
+		
+		// UPGRADE SCREEN
+		if (gp.gameState == gp.upgradeState) {
+			if (code == KeyEvent.VK_B) {
+				gp.gameState = gp.menuState;
+			}
+		}
+		
+		// INFO SCREEN
+		if (gp.gameState == gp.infoState) {
+			if (code == KeyEvent.VK_B) {
+				gp.gameState = gp.menuState;
 			}
 		}
 	}

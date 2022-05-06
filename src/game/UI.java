@@ -46,6 +46,97 @@ public class UI {
 		if (gp.gameState == gp.menuState) {
 			drawMenuScreen();
 		}
+		if (gp.gameState == gp.upgradeState) {
+			drawUpgradeScreen();
+		}
+		if (gp.gameState == gp.infoState) {
+			drawInfoScreen();
+		}
+	}
+	
+	public void drawUpgradeScreen() {
+		g2.setColor(new Color(50, 50, 50));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		
+
+		g2.setColor(Color.WHITE);
+		String text = "You are in Level 1";
+		int x = getXforCenteredText(text);
+		int y = gp.tileSize * 8;
+		g2.drawString(text, x, y);
+		
+		text = "Upgrades coming in the year 3022!";
+		x = getXforCenteredText(text);
+		y = gp.tileSize * 12;
+		g2.drawString(text, x, y);		
+		
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25f));
+		text = "Until then, keep fending off the zombie pigmen...";
+		x = getXforCenteredText(text);
+		y = gp.tileSize * 23;
+		g2.drawString(text, x, y);		
+		
+		g2.setColor(new Color(74, 255, 233));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25f));
+		text = "[ Press Key B to go to Menu ]";
+		x = getXforCenteredText(text);
+		y = gp.tileSize * 30;
+		g2.drawString(text, x, y);	
+	}
+	
+	public void drawInfoScreen() {
+		g2.setColor(new Color(50, 50, 50));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		
+		g2.setColor(new Color(170, 170, 170));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+		String text = "Gameplay";
+		int x = getXforCenteredText(text);
+		int y = gp.tileSize * 3;
+		g2.drawString(text, x, y);
+		
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 23f));
+		text = "Hello, Teddy Wizard. Unfortunately, you've fallen ";
+		x = getXforCenteredText(text);														
+		y = gp.tileSize * 8;
+		g2.drawString(text, x, y);
+		
+		text = "into a nether portal and now you're trapped in The Nether.";
+		x = getXforCenteredText(text);														
+		y = gp.tileSize * 10;
+		g2.drawString(text, x, y);
+		
+		text = "Luckily for you, the villagers would be glad to welcome you";
+		x = getXforCenteredText(text);														
+		y = gp.tileSize * 16;
+		g2.drawString(text, x, y);
+		
+		text = "to their village IF you protect them from a never-ending";
+		x = getXforCenteredText(text);														
+		y = gp.tileSize * 18;
+		g2.drawString(text, x, y);
+		
+		text = "swarm of zombie pigmen. Use W, A, S, D keys to move";
+		x = getXforCenteredText(text);														
+		y = gp.tileSize * 20;
+		g2.drawString(text, x, y);
+		
+		text = "and ENTER key to use your diamond sword to kill the zombie";
+		x = getXforCenteredText(text);														
+		y = gp.tileSize * 22;
+		g2.drawString(text, x, y);
+		
+		text = "pigmen. Kill as many as you can!";
+		x = getXforCenteredText(text);														
+		y = gp.tileSize * 24;
+		g2.drawString(text, x, y);
+		
+		g2.setColor(new Color(74, 255, 233));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 25f));
+		text = "[ Press Key B to go to Menu ]";
+		x = getXforCenteredText(text);
+		y = gp.tileSize * 30;
+		g2.drawString(text, x, y);	
 	}
 		
 	public void drawMenuScreen() {

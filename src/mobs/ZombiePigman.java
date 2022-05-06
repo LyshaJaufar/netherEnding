@@ -36,6 +36,11 @@ public class ZombiePigman extends Entity {
 		maxLife = 4;
 		life = maxLife;
 		
+		invincible = true;
+		invincibleCounter = 0;
+
+		dead = false;
+		
 		setDefaultValues(gp);
 	}
 	
@@ -111,8 +116,18 @@ public class ZombiePigman extends Entity {
 	public void createZombiePigman(Graphics2D graphics, GamePanel gp) {
 		
 		int pixel = 2;
-		
-		if (direction == "down") {
+
+
+		if (direction == "down" && dead == false) {
+			// Health Bar
+			double oneScale = (double)(gp.tileSize-2)/maxLife;
+			double hpBarValue = oneScale*life;
+			
+			graphics.setColor(new Color(35,35,35));
+			graphics.fillRect(x-5, y + 45, gp.tileSize, 6);
+			
+			graphics.setColor(new Color(138, 57, 225));
+			graphics.fillRect(x-4, y + 46, (int)hpBarValue, 4);
 			
 			graphics.setColor(zombieVeryLightGreen);
 			// Head
@@ -221,7 +236,16 @@ public class ZombiePigman extends Entity {
 			graphics.fillRect(x, y + pixel * 16, pixel * 6, pixel * 2);
 			
 		}
-		else if (direction == "up") {
+		else if (direction == "up" && dead == false) {
+			// Health Bar
+			double oneScale = (double)(gp.tileSize-2)/maxLife;
+			double hpBarValue = oneScale*life;
+			
+			graphics.setColor(new Color(35,35,35));
+			graphics.fillRect(x-5, y + 45, gp.tileSize, 6);
+			
+			graphics.setColor(new Color(138, 57, 225));
+			graphics.fillRect(x-4, y + 46, (int)hpBarValue, 4);
 
 			graphics.setColor(zombieVeryLightGreen);
 			// Head
@@ -329,7 +353,16 @@ public class ZombiePigman extends Entity {
 			graphics.setColor(pants);
 			graphics.fillRect(x, y + pixel * 16, pixel * 6, pixel * 2);
 		}
-		else if (direction == "left") {
+		else if (direction == "left" && dead == false) {
+			// Health Bar
+			double oneScale = (double)(gp.tileSize-2)/maxLife;
+			double hpBarValue = oneScale*life;
+			
+			graphics.setColor(new Color(35,35,35));
+			graphics.fillRect(x-5, y + 45, gp.tileSize, 6);
+			
+			graphics.setColor(new Color(138, 57, 225));
+			graphics.fillRect(x-4, y + 46, (int)hpBarValue, 4);
 
 			graphics.setColor(zombieVeryLightGreen);
 			// Head
@@ -440,7 +473,16 @@ public class ZombiePigman extends Entity {
 			graphics.fillRect(x + pixel, y + pixel * 16, pixel * 4, pixel * 2);
 
 		}		
-		else if (direction == "right") {
+		else if (direction == "right" && dead == false) {
+			// Health Bar
+			double oneScale = (double)(gp.tileSize-2)/maxLife;
+			double hpBarValue = oneScale*life;
+			
+			graphics.setColor(new Color(35,35,35));
+			graphics.fillRect(x-5, y + 45, gp.tileSize, 6);
+			
+			graphics.setColor(new Color(138, 57, 225));
+			graphics.fillRect(x-4, y + 46, (int)hpBarValue, 4);
 
 			graphics.setColor(zombieVeryLightGreen);
 			// Head
@@ -553,6 +595,7 @@ public class ZombiePigman extends Entity {
 			graphics.fillRect(x + pixel, y + pixel * 16, pixel * 4, pixel * 2);
 			
 		}
+
 	}	
 
 }																																						

@@ -6,7 +6,7 @@ public class Obj_House extends SuperObject {
 		name = "House";
 		collision = true;
 		
-		maxHealthValue = 6;
+		maxHealthValue = 8;
 		healthValue = maxHealthValue;
 		
 		invincible = true;

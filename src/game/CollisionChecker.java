@@ -118,7 +118,7 @@ public class CollisionChecker {
 					entity.solidArea.x += entity.speed;
 				}
 				
-				if (entity.solidArea.intersects(gp.obj[i].solidArea)) {
+				if (entity.solidArea.intersects(gp.obj[i].solidArea) && entity.dead == false) {
 					if (gp.obj[i].collision == true && entity.name == "Player") {
 						entity.collisionOn = true;
 					}

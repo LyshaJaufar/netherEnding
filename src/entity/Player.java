@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -11,8 +12,8 @@ public class Player extends Entity {
 
 	public static String name = "Player";
 	KeyHandler keyH;
-	int playerMovementCount = 1;
-	
+	int playerMovementCount = 70;
+
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
 		super(gp, name);
@@ -22,6 +23,10 @@ public class Player extends Entity {
 		solidArea = new Rectangle(1, 23, 4, 8);
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
+		
+		attackArea.width = 36;
+		attackArea.height = 36;
+		
 		setDefaultValues();
 	}
 	
@@ -86,7 +91,7 @@ public class Player extends Entity {
 		}
 		
 		// Spawning system
-		if (playerMovementCount % 75 == 0) {
+		if (playerMovementCount % 115 == 0) {
 			gp.aSetter.setMob();
 		}
 	}
@@ -100,6 +105,41 @@ public class Player extends Entity {
 
 		else if (attackAnimationCounter > 5 && attackAnimationCounter <= 25) {
 			attackAnimationNum = 2;
+			
+			// Save x, y coords & solid area
+			int currentXCoord = x;
+			int currentYCoord = y;
+			int solidAreaWidth = solidArea.width;
+			int solidAreaHeight = solidArea.height;
+			
+			// Updated x, y & solid area
+			if (direction == "up") {
+				y -= attackArea.height;
+			} 
+			else if (direction == "down") {
+				y += attackArea.height;
+			}
+			else if (direction == "left") {
+				x -= attackArea.width;
+			}
+			else if (direction == "right") {
+				x += attackArea.width;
+			}
+			
+			// Attack area becomes solid area
+			solidArea.width = attackArea.width;
+			solidArea.height = attackArea.height;
+			
+			// Check mob collision with the updated x, y & solid area
+			int mobIndex = gp.collisionChecker.checkEntity(this, gp.mob);
+			damageMob(mobIndex);
+			
+			// After checking collision, restore the original data
+			x = currentXCoord;
+			y = currentYCoord;
+			solidArea.width = solidAreaWidth;
+			solidArea.height = solidAreaHeight;
+			
 		}
 		 
 		else if (attackAnimationCounter > 25) {
@@ -108,7 +148,27 @@ public class Player extends Entity {
 			attacking = false;
 		}
 	}
+	
+	public void damageMob(int mobIndex) {
 
+		if (mobIndex != 999 && gp.mob.get(mobIndex).life > 0) {
+			if (gp.mob.get(mobIndex).invincible == true) {
+				gp.mob.get(mobIndex).invincibleCounter++;
+				if (gp.mob.get(mobIndex).invincibleCounter > 15) {
+					gp.mob.get(mobIndex).invincible = false;
+					gp.mob.get(mobIndex).invincibleCounter = 0;
+				}
+			}
+			else if (gp.mob.get(mobIndex).invincible == false) {
+				gp.mob.get(mobIndex).life--;	
+				gp.mob.get(mobIndex).invincible = true;
+			}
+		}
+		else if (mobIndex != 999 && gp.mob.get(mobIndex).life <= 0) {
+			gp.mob.get(mobIndex).dead = true;
+		}
+	}
+		
 	public void draw(Graphics2D g2) {
 		
 		Color darkBlue = new Color(33, 50, 94);

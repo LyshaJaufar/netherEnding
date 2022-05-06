@@ -22,8 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int maxScreenCol = 36;
 	public final int maxScreenRow = 32;
 	public final int screenWidth = tileSize * maxScreenCol;	
-	public final int screenHeight = tileSize * maxScreenRow;	
-	
+	public final int screenHeight = tileSize * maxScreenRow;
+
 	int FPS = 60;
 	
 	TileManager tileM = new TileManager(this);
@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Thread gameThread;
 	
 	// Player, Objects & Enemies
-	Player player = new Player(this, keyH);
+	public Player player = new Player(this, keyH);
 	public CollisionChecker collisionChecker = new CollisionChecker(this);
 	public SuperObject obj[] = new SuperObject[20];
 	public ArrayList<Entity> mob = new ArrayList<Entity>();

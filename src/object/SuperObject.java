@@ -14,7 +14,7 @@ public class SuperObject {
 	
 	// House Health
 	public int healthValue;
-	public int maxHealthValue = 6;
+	public int maxHealthValue = 8;
 	public boolean invincible;
 	public int invincibleCounter;
 	public boolean destroyed;

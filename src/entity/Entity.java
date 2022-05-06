@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -17,6 +18,7 @@ public class Entity {
 	public String name;
 	public Rectangle solidArea = new Rectangle(0,0,30,35);
 	public int solidAreaDefaultX, solidAreaDefaultY;
+	public Rectangle attackArea = new Rectangle(0,0,0,0);
 	
 	public boolean collisionOn = false;
 	public boolean collisionUpOn = false;
@@ -31,6 +33,10 @@ public class Entity {
 	boolean leftVillageBorder = false;
 	boolean rightVillageBorder = false;
 	boolean fromSide = false;
+	
+	public boolean invincible;
+	public int invincibleCounter;
+	public boolean dead = false;
 		
 	public int maxLife;
 	public int life;
@@ -299,7 +305,6 @@ public class Entity {
 				}
 			}
 		}
-
 	}
-	
+
 }

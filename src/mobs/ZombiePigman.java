@@ -23,7 +23,7 @@ public class ZombiePigman extends Entity {
 	int actionLockCounter = 0;
 
 	
-	public ZombiePigman(GamePanel gp, int index) {
+	public ZombiePigman(GamePanel gp) {
 		
 		super(gp, name);
 		
@@ -46,8 +46,10 @@ public class ZombiePigman extends Entity {
 	
 	public void setDefaultValues(GamePanel gp) {
 		
-		x = gp.aSetter.zombiePigmanXCoord[gp.aSetter.zombiePigmanCoordIndex] * gp.tileSize;
-		y = gp.aSetter.zombiePigmanYCoord[gp.aSetter.zombiePigmanCoordIndex] * gp.tileSize;
+		x = gp.aSetter.zombiePigmanXCoord * gp.tileSize;
+		y = gp.aSetter.zombiePigmanYCoord * gp.tileSize;
+		
+		System.out.println(gp.aSetter.zombiePigmanYCoord);
 		speed = 1;
 		direction = "left";	
 		

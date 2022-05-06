@@ -1,13 +1,14 @@
 package game;
 
+import java.util.Random;
+
 import mobs.ZombiePigman;
 import object.Obj_House;
 
 public class AssetSetter {
 	GamePanel gp;
-	public int zombiePigmanXCoord[] = new int[] {14, 25, 12, 29, 5, 19, 15, 10, 6, 20};
-	public int zombiePigmanYCoord[] = new int[] {22, 10, 4, 14, 15, 21, 9, 18, 13, 7};
-	public int zombiePigmanCoordIndex = 0;
+	public int zombiePigmanXCoord;
+	public int zombiePigmanYCoord;
 	public int zombiePigmanCount = 0;
 	
 	public AssetSetter(GamePanel gp) {
@@ -28,16 +29,42 @@ public class AssetSetter {
 		gp.obj[2].y = 15 * gp.tileSize;
 	}
 	
+	
 	public void setMob() {
-		if (zombiePigmanCoordIndex == zombiePigmanXCoord.length) {
-			zombiePigmanCoordIndex = 0;
-		}	
+
+		int xCoordMax = 29;
+		int xCoordMin = 10;
+		int yCoordMax = 25;
+		int yCoordMin = 5;
+			
+		zombiePigmanYCoord = (int)Math.floor(Math.random()*(yCoordMax-yCoordMin+1)+yCoordMin);
+		zombiePigmanXCoord = (int)Math.floor(Math.random()*(xCoordMax-xCoordMin+1)+xCoordMin);
+				
+		// if mob spawns inside village or on the gate, randomly add/subtract to ensure it is outside the village
+		if ((zombiePigmanXCoord > 11 && zombiePigmanXCoord < 24) && (zombiePigmanYCoord > 9 && zombiePigmanYCoord < 16)) {
+			Random rand = new Random(); 
+
+		    int intRandom = rand.nextInt(3); 
+		    
+		    if (intRandom == 0) {
+		    	if (zombiePigmanXCoord >= 18) {
+		    		zombiePigmanXCoord += 6;
+		    	} else {
+		    		zombiePigmanXCoord -= 6;
+		    	}
+		    }
+		    else if (intRandom == 1) {
+		    	zombiePigmanYCoord += 7;
+		    }
+		    else if (intRandom == 2) {
+		    	zombiePigmanYCoord -= 7;
+		    }
+		}
 		
-		gp.mob.add(new ZombiePigman(gp, zombiePigmanCoordIndex));
-		gp.mob.get(zombiePigmanCount).x = zombiePigmanXCoord[zombiePigmanCoordIndex] * gp.tileSize;
-		gp.mob.get(zombiePigmanCount).y = zombiePigmanYCoord[zombiePigmanCoordIndex] * gp.tileSize;
+		gp.mob.add(new ZombiePigman(gp));
+		gp.mob.get(zombiePigmanCount).x = zombiePigmanXCoord * gp.tileSize;
+		gp.mob.get(zombiePigmanCount).y = zombiePigmanYCoord * gp.tileSize;
 
 		zombiePigmanCount++;
-		zombiePigmanCoordIndex++;
 	}
 }

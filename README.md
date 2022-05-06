@@ -6,11 +6,10 @@ Hello, Teddy Wizard. Unfortunately, you've fallen into a nether portal and now y
 Use W, A, S, D keys to move and ENTER key to use your diamond sword to kill the zombie pigmen. Kill as many as you can!
 
 # What I Learnt
-*
--OOP with java
--javax.swing GUI for basic 2D game dev
--player mechanics
--simple pixel art
+*OOP with java
+*javax.swing GUI for basic 2D game dev
+*player mechanics
+*simple pixel art
 
 # Game 
 ![Screenshot (680)](https://user-images.githubusercontent.com/63420202/167183367-a2ad116b-3f13-4005-88df-80b9283a9d9d.png)

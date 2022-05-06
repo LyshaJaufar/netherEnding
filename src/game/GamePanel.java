@@ -24,23 +24,30 @@ public class GamePanel extends JPanel implements Runnable {
 	public final int screenWidth = tileSize * maxScreenCol;	
 	public final int screenHeight = tileSize * maxScreenRow;
 
-	int FPS = 60;
-	
+	// System
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler();
+	KeyHandler keyH = new KeyHandler(this);
+	public CollisionChecker collisionChecker = new CollisionChecker(this);
+	public AssetSetter aSetter = new AssetSetter(this);
 	Thread gameThread;
+	public UI ui = new UI(this);
+	int FPS = 60;
 	
 	// Player, Objects & Enemies
 	public Player player = new Player(this, keyH);
-	public CollisionChecker collisionChecker = new CollisionChecker(this);
 	public SuperObject obj[] = new SuperObject[20];
 	public ArrayList<Entity> mob = new ArrayList<Entity>();
-	public AssetSetter aSetter = new AssetSetter(this);
  	
 	// Set player's default positions
 	int playerX = 100;
 	int playerY = 100;
 	int playerSpeed = 4;
+	
+	// Game State
+	public int gameState;
+	public final int menuState = 0;
+	public final int playState = 1;
+	public final int gameOverState = 2;
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -52,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void setUpGame() {
 		aSetter.setObject();
-		//aSetter.setMob();
+		gameState = menuState;
 	}
 	   
 	public void startGameThread() {
@@ -83,14 +90,16 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void update() {
-		player.update();
 
-		for (int i = 0; i < mob.size(); i++) {
-			if (mob.get(i) != null) {
-				mob.get(i).update(mob.get(i).x, mob.get(i).y, obj[0].x, obj[0].y);
+		if (gameState == playState) {
+			player.update();
+
+			for (int i = 0; i < mob.size(); i++) {
+				if (mob.get(i) != null) {
+					mob.get(i).update(mob.get(i).x, mob.get(i).y, obj[0].x, obj[0].y);
+				}
 			}
 		}
-		
 	}	
 	
 	public void paintComponent(Graphics g) {
@@ -98,20 +107,25 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		Graphics2D g2 = (Graphics2D)g;
 		
-		tileM.draw(g2);
-		obj[0].draw(g2, this, 14, 16);
-		obj[1].draw(g2, this, 17, 14);
-		obj[2].draw(g2, this, 20, 15);
-		
-		for (int i = 0; i < mob.size(); i++) {
-			if (mob.get(i) != null) {
-				mob.get(i).draw(g2, this);
+		if (gameState == menuState) {
+			ui.draw(g2);
+		} else {
+			tileM.draw(g2);
+			obj[0].draw(g2, this, 14, 16);
+			obj[1].draw(g2, this, 17, 14);
+			obj[2].draw(g2, this, 20, 15);
+			
+			for (int i = 0; i < mob.size(); i++) {
+				if (mob.get(i) != null) {
+					mob.get(i).draw(g2, this);
+				}
 			}
+			
+			player.draw(g2);
+			
+			ui.draw(g2);
 		}
 		
-		player.draw(g2);
-		
 		g2.dispose();
-		
 	}
 }

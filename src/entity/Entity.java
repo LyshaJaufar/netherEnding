@@ -95,6 +95,11 @@ public class Entity {
 		else if (gp.obj[1].destroyed == true) {
 			targetX = gp.obj[2].x;
 			targetY = gp.obj[2].y;
+			
+			// GAME OVER
+			if (gp.obj[2].destroyed == true) {
+				gp.gameState = gp.gameOverState;
+			}
 		}
 
 		

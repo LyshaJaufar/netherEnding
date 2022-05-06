@@ -92,10 +92,12 @@ public class Player extends Entity {
 		
 		// Spawning system
 		if (playerMovementCount % 115 == 0) {
+			playerMovementCount = 1;
 			gp.aSetter.setMob();
 		}
 	}
 	
+
 	public void attacking() {
 		attackAnimationCounter++;
 		

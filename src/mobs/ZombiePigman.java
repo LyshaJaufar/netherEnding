@@ -48,8 +48,7 @@ public class ZombiePigman extends Entity {
 		
 		x = gp.aSetter.zombiePigmanXCoord * gp.tileSize;
 		y = gp.aSetter.zombiePigmanYCoord * gp.tileSize;
-		
-		System.out.println(gp.aSetter.zombiePigmanYCoord);
+
 		speed = 1;
 		direction = "left";	
 		

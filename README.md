@@ -10,7 +10,7 @@ Use W, A, S, D keys to move and ENTER key to use your diamond sword to kill the 
 * OOP with java
 * javax.swing GUI for basic 2D game dev
 * player mechanics
-* basic pixel art
+* simple pixel art
 
 
 # Game 

@@ -13,6 +13,7 @@ public class Player extends Entity {
 	public static String name = "Player";
 	KeyHandler keyH;
 	int playerMovementCount = 70;
+	public int killCount = 0;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -134,7 +135,7 @@ public class Player extends Entity {
 			
 			// Check mob collision with the updated x, y & solid area
 			int mobIndex = gp.collisionChecker.checkEntity(this, gp.mob);
-			damageMob(mobIndex);
+			attackMob(mobIndex);
 			
 			// After checking collision, restore the original data
 			x = currentXCoord;
@@ -151,7 +152,7 @@ public class Player extends Entity {
 		}
 	}
 	
-	public void damageMob(int mobIndex) {
+	public void attackMob(int mobIndex) {
 
 		if (mobIndex != 999 && gp.mob.get(mobIndex).life > 0) {
 			if (gp.mob.get(mobIndex).invincible == true) {
@@ -167,7 +168,14 @@ public class Player extends Entity {
 			}
 		}
 		else if (mobIndex != 999 && gp.mob.get(mobIndex).life <= 0) {
+			int count = 0;
 			gp.mob.get(mobIndex).dead = true;
+			for (int i = 0; i < gp.mob.size(); i++) {
+				if (gp.mob.get(i).dead) {
+					count++;
+				}
+			}
+			killCount = count;
 		}
 	}
 		

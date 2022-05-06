@@ -45,7 +45,6 @@ public class AssetSetter {
 			Random rand = new Random(); 
 
 		    int intRandom = rand.nextInt(3); 
-		    System.out.println(intRandom);
 		    
 		    if (intRandom == 0) {
 		    	if (zombiePigmanXCoord >= 18) {
@@ -65,9 +64,6 @@ public class AssetSetter {
 		gp.mob.add(new ZombiePigman(gp));
 		gp.mob.get(zombiePigmanCount).x = zombiePigmanXCoord * gp.tileSize;
 		gp.mob.get(zombiePigmanCount).y = zombiePigmanYCoord * gp.tileSize;
-		
-		System.out.println("x: " + zombiePigmanXCoord);
-		System.out.println("y: " + zombiePigmanYCoord);
 
 		zombiePigmanCount++;
 	}

@@ -31,7 +31,14 @@ public class UI {
 		this.g2 = g2;
 		
 		g2.setFont(arial_40);
-		g2.setColor(Color.WHITE);
+		g2.setColor(new Color(50, 50, 50));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+		g2.drawString("KILL COUNT", 30, 60);
+		
+		g2.setColor(new Color(220, 220, 220));
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40f));
+		g2.drawString(String.valueOf(gp.player.killCount), 30, 110);
+		
 		
 		if (gp.gameState == gp.gameOverState) {
 			drawGameOverScreen();

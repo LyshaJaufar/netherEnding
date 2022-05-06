@@ -39,9 +39,6 @@ public class AssetSetter {
 			
 		zombiePigmanYCoord = (int)Math.floor(Math.random()*(yCoordMax-yCoordMin+1)+yCoordMin);
 		zombiePigmanXCoord = (int)Math.floor(Math.random()*(xCoordMax-xCoordMin+1)+xCoordMin);
-				
-		System.out.println("x first: " + zombiePigmanXCoord);
-		System.out.println("y first: " + zombiePigmanYCoord);
 		
 		// if mob spawns inside village or on the gate, randomly add/subtract to ensure it is outside the village
 		if ((zombiePigmanXCoord > 11 && zombiePigmanXCoord < 24) && (zombiePigmanYCoord > 9 && zombiePigmanYCoord < 17)) {
@@ -68,8 +65,6 @@ public class AssetSetter {
 		gp.mob.get(zombiePigmanCount).x = zombiePigmanXCoord * gp.tileSize;
 		gp.mob.get(zombiePigmanCount).y = zombiePigmanYCoord * gp.tileSize;
 
-		System.out.println("x: " + zombiePigmanXCoord);
-		System.out.println("y: " + zombiePigmanYCoord);
 		zombiePigmanCount++;
 	}
 }

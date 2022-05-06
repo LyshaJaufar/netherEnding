@@ -92,7 +92,7 @@ public class Player extends Entity {
 		}
 		
 		// Spawning system
-		if (playerMovementCount % 115 == 0) {
+		if (playerMovementCount % 95 == 0) {
 			playerMovementCount = 1;
 			gp.aSetter.setMob();
 		}

@@ -7,7 +7,7 @@ Hello, Teddy Wizard. Unfortunately, you've fallen into a nether portal and now y
 Use W, A, S, D keys to move and ENTER key to use your diamond sword to kill the zombie pigmen. Kill as many as you can!
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/63420202/c2a20804df1cdfc8a0537c47ec4a22242655a1e3/ezgif.com-gif-maker(1).gif">
+<img src="https://user-images.githubusercontent.com/63420202/183264017-2599fdd7-3748-46ae-a3cf-0cee0d047d4f.gif">
 </p>
 
 # What I Learnt
